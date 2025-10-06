@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Stark TH</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">Stark TH</a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="inventory.html" class="nav__link">Inventory</a></li>
+                    <li class="nav__item"><a href="services.html" class="nav__link">Services</a></li>
+                    <li class="nav__item"><a href="contact.html" class="nav__link active">Contact</a></li>
+                </ul>
+                <div class="nav__compare">
+                    <a href="inventory.html#comparison-section" class="compare-trigger">
+                        <i class="fas fa-balance-scale"></i>
+                        Compare (<span id="compare-count">0</span>)
+                    </a>
+                </div>
+            </div>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="fa fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main class="contact-main">
+        <!-- Contact Hero Section -->
+        <section class="contact-hero section">
+            <div class="container">
+                <h1 class="contact-title">Get In Touch</h1>
+                <p class="contact-subtitle">We're here to help you find your perfect vehicle</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section section">
+            <div class="container">
+                <div class="contact__container">
+                    <div class="contact__info glass">
+                        <h3>Contact Information</h3>
+                        <p class="info-description">Fill out the form or use the details below to reach us.</p>
+                        
+                        <div class="info__item">
+                            <div class="info-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Our Showroom</h4>
+                                <p>123 Auto Plaza, Motor City</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info__item">
+                            <div class="info-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Phone Number</h4>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info__item">
+                            <div class="info-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Email Address</h4>
+                                <p>info@starkth.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="info__item">
+                            <div class="info-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="info-content">
+                                <h4>Working Hours</h4>
+                                <p>Mon - Sat: 9:00 AM - 7:00 PM</p>
+                            </div>
+                        </div>
+
+                        <div class="social-links">
+                            <h4>Follow Us</h4>
+                            <div class="social-icons">
+                                <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact__form glass">
+                        <h3>Send us a Message</h3>
+                        <form id="contactForm">
+                            <div class="form__group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                            </div>
+                            
+                            <div class="form__group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                            </div>
+                            
+                            <div class="form__group">
+                                <label for="subject">Subject *</label>
+                                <input type="text" id="subject" name="subject" required placeholder="Enter message subject">
+                            </div>
+                            
+                            <div class="form__group">
+                                <label for="message">Your Message *</label>
+                                <textarea id="message" name="message" rows="6" required placeholder="Tell us about your requirements or questions"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn--primary form-submit">
+                                <i class="fas fa-paper-plane"></i> Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="map-section section">
+            <div class="container">
+                <h2 class="section__title">Visit Our Showroom</h2>
+                <div class="map-container glass">
+                    <div class="map-placeholder">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Stark TH Showroom</h3>
+                        <p>123 Auto Plaza, Motor City</p>
+                        <p>Open Mon-Sat: 9:00 AM - 7:00 PM</p>
+                        <div class="map-actions">
+                            <a href="#" class="btn btn--primary">
+                                <i class="fas fa-directions"></i> Get Directions
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <h3>Stark TH</h3>
+                    <p>Your trusted partner for premium vehicles. We are committed to excellence and customer satisfaction.</p>
+                </div>
+                <div class="footer__section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="inventory.html">Inventory</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Auto Plaza, Motor City</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@starkth.com</p>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2025 Stark TH. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Chat Button -->
+    <div class="floating-chat">
+        <a href="https://your-facebook-group-link" target="_blank" aria-label="Chat with us on Facebook">
+            <i class="fab fa-facebook-messenger"></i>
+        </a>
+        <a href="https://wa.me/your-number" target="_blank" aria-label="Chat with us on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/form-handler.js"></script>
+</body>
+</html>

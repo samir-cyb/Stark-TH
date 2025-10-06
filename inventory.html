@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Inventory | Stark TH</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/inventory.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">Stark TH</a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="inventory.html" class="nav__link active">Inventory</a></li>
+                    <li class="nav__item"><a href="services.html" class="nav__link">Services</a></li>
+                    <li class="nav__item"><a href="contact.html" class="nav__link">Contact</a></li>
+                </ul>
+                <div class="nav__compare">
+                    <a href="#comparison-section" class="compare-trigger" id="compare-trigger">
+                        <i class="fas fa-balance-scale"></i>
+                        Compare (<span id="compare-count">0</span>)
+                    </a>
+                </div>
+            </div>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="fa fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Inventory Hero -->
+        <section class="inventory-hero section">
+            <div class="container">
+                <h1 class="inventory-title">Our Premium Collection</h1>
+                <p class="inventory-subtitle">Discover our carefully curated selection of luxury and performance vehicles</p>
+                
+                <!-- Filter Section -->
+                <div class="filters glass">
+                    <div class="filter-group">
+                        <label for="brand-filter">Brand</label>
+                        <select id="brand-filter">
+                            <option value="all">All Brands</option>
+                            <option value="audi">Audi</option>
+                            <option value="bmw">BMW</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="tesla">Tesla</option>
+                            <option value="porsche">Porsche</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="price-filter">Max Price</label>
+                        <select id="price-filter">
+                            <option value="all">Any Price</option>
+                            <option value="30000">$30,000</option>
+                            <option value="50000">$50,000</option>
+                            <option value="75000">$75,000</option>
+                            <option value="100000">$100,000+</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="type-filter">Vehicle Type</label>
+                        <select id="type-filter">
+                            <option value="all">All Types</option>
+                            <option value="suv">SUV</option>
+                            <option value="sedan">Sedan</option>
+                            <option value="coupe">Coupe</option>
+                            <option value="sports">Sports</option>
+                        </select>
+                    </div>
+                    <button class="btn btn--primary" id="apply-filters">Apply Filters</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Showcase Section -->
+        <section class="showcase section">
+            <div class="container">
+                <div class="showcase__container" id="showcase-container">
+                    <!-- Product cards will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section id="comparison-section" class="comparison-section section">
+            <div class="container">
+                <h2 class="section__title">Compare Vehicles</h2>
+                <div class="comparison-container" id="comparison-container">
+                    <p class="no-comparison">Select vehicles to compare by checking the "Compare" box on car cards</p>
+                    <!-- Comparison table will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals -->
+    <!-- Order Options Modal -->
+    <div class="modal" id="order-modal">
+        <div class="modal__content glass">
+            <span class="modal__close">&times;</span>
+            <h2 class="modal-title">Request Information</h2>
+            <form id="order-form">
+                <input type="hidden" id="order-car-id">
+                <div class="form__group">
+                    <label for="order-name">Full Name</label>
+                    <input type="text" id="order-name" name="name" required>
+                </div>
+                <div class="form__group">
+                    <label for="order-email">Email Address</label>
+                    <input type="email" id="order-email" name="email" required>
+                </div>
+                <div class="form__group">
+                    <label for="order-phone">Phone Number</label>
+                    <input type="tel" id="order-phone" name="phone" required>
+                </div>
+                <div class="form__group">
+                    <label for="order-message">Your Questions/Requirements</label>
+                    <textarea id="order-message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn--primary modal-submit">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- View Details Modal -->
+    <div class="modal" id="details-modal">
+        <div class="modal__content glass large">
+            <span class="modal__close">&times;</span>
+            <div class="details-content" id="details-content">
+                <!-- Details content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <h3>Stark TH</h3>
+                    <p>Your trusted partner for premium vehicles. We are committed to excellence and customer satisfaction.</p>
+                </div>
+                <div class="footer__section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="inventory.html">Inventory</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Auto Plaza, Motor City</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@starkth.com</p>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2025 Stark TH. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Chat Button -->
+    <div class="floating-chat">
+        <a href="https://your-facebook-group-link" target="_blank" aria-label="Chat with us on Facebook">
+            <i class="fab fa-facebook-messenger"></i>
+        </a>
+        <a href="https://wa.me/your-number" target="_blank" aria-label="Chat with us on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/inventory.js"></script>
+</body>
+</html>
