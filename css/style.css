@@ -80,11 +80,30 @@ body {
 }
 
 .nav__logo {
-    font-size: 1.8rem;
+    /* We move the font-size to the spans below */
     font-weight: 700;
     color: var(--color-white);
     text-decoration: none;
     z-index: 1001;
+    
+    /* New styles for the container */
+    display: inline-block; /* Allows the container to hold stacked elements */
+    line-height: 1.1;      /* Pulls the two lines closer together */
+    text-align: center;    /* Centers 'International' in case its width differs */
+}
+
+.logo-main {
+    display: block;       /* Makes "Stark" its own line */
+    font-size: 1.8rem;    /* The big font size you wanted */
+    font-weight: 700;
+    /* This stretches the word "Stark" to be wider */
+    letter-spacing: 6.5px; 
+}
+
+.logo-sub {
+    display: block;       /* Makes "International" its own line */
+    font-size: 0.9rem;    /* Smaller font size */
+    font-weight: 400;     /* Lighter font weight */
 }
 
 .nav__menu {
