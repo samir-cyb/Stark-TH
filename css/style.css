@@ -747,6 +747,7 @@ body {
     .social-icons {
         justify-content: center;
     }
+<<<<<<< HEAD
     
     .map-container {
         padding: 1.5rem;
@@ -773,6 +774,138 @@ body {
     
     .hero__description {
         font-size: 1rem;
+=======
+}
+
+/* === Mobile Responsive Fixes === */
+@media (max-width: 768px) {
+    /* Header fixes */
+    .header {
+        height: 70px;
+    }
+    
+    .nav {
+        padding: 0.8rem 0;
+        height: 100%;
+    }
+    
+    .nav__menu {
+        position: fixed;
+        top: 70px; /* Match header height */
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        flex-direction: column;
+        background: rgba(95, 158, 160, 0.98);
+        backdrop-filter: blur(20px);
+        padding: 2rem 0;
+        transition: left 0.5s ease;
+        gap: 1.5rem;
+        overflow-y: auto;
+        z-index: 999;
+    }
+
+    .nav__menu.active {
+        left: 0;
+    }
+
+    .nav__list {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+        width: 100%;
+    }
+
+    .nav__link {
+        display: block;
+        padding: 1rem;
+        font-size: 1.1rem;
+        border-radius: 0;
+    }
+
+    .nav__toggle {
+        display: block;
+        z-index: 1000;
+    }
+
+    /* Hero section adjustments */
+    .hero-section {
+        padding-top: 70px; /* Match header height */
+        min-height: calc(100vh - 70px);
+    }
+
+    .hero__title {
+        font-size: 2rem;
+    }
+
+    .hero__description {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+
+    /* About section adjustments */
+    .about__content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .about__stats {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .stat {
+        padding: 1rem;
+    }
+
+    /* Contact page adjustments */
+    .contact__container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .contact-title {
+        font-size: 2rem;
+    }
+
+    /* Footer adjustments */
+    .footer__content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    /* Section padding adjustments */
+    .section {
+        padding: 3rem 0;
+    }
+
+    .section__title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Floating chat button adjustments */
+    .floating-chat {
+        bottom: 20px;
+        left: 20px;
+    }
+
+    .floating-chat a {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Additional fixes for very small screens */
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+    }
+    
+    .hero__title {
+        font-size: 1.8rem;
+>>>>>>> e07d0d0d35580d95ad0fdd80ff3196b86a773211
     }
     
     .btn {
@@ -780,6 +913,7 @@ body {
         font-size: 0.9rem;
     }
     
+<<<<<<< HEAD
     .about__text p {
         font-size: 1rem;
     }
@@ -865,4 +999,14 @@ a, button, .btn, .nav__link, .form__group input, .form__group textarea {
 a:focus, button:focus, .btn:focus, .nav__link:focus {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
+=======
+    .section {
+        padding: 2rem 0;
+    }
+}
+
+/* Prevent body scroll when menu is open */
+body.no-scroll {
+    overflow: hidden;
+>>>>>>> e07d0d0d35580d95ad0fdd80ff3196b86a773211
 }
