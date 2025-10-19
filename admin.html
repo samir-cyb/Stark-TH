@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Stark TH</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">Stark TH</a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="models.html" class="nav__link">Models</a></li>
+                    <li class="nav__item"><a href="services.html" class="nav__link">Services</a></li>
+                    <li class="nav__item"><a href="contact.html" class="nav__link">Contact</a></li>
+                    <li class="nav__item"><a href="#" class="nav__link active">Admin</a></li>
+                </ul>
+            </div>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="fa fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Admin Hero -->
+        <section class="admin-hero section">
+            <div class="container">
+                <h1 class="admin-title">Admin Panel</h1>
+                <p class="admin-subtitle">Manage your vehicle inventory</p>
+                <button class="btn btn--secondary" id="logout-btn">Logout</button>
+            </div>
+        </section>
+
+        <!-- Admin Panel -->
+        <section class="admin-panel section">
+            <div class="container">
+                <div class="admin-tabs">
+                    <button class="tab-btn active" data-tab="publish">Publish</button>
+                    <button class="tab-btn" data-tab="hidden">Hidden</button>
+                </div>
+                
+                <div class="tab-content">
+                    <div id="publish-tab" class="tab-pane active">
+                        <h2>Add New Vehicle (Publish)</h2>
+                        <form id="publish-car-form" class="admin-form">
+                            <div class="form-row">
+                                <div class="form__group">
+                                    <label for="car-name">Vehicle Name *</label>
+                                    <input type="text" id="car-name" name="car-name" required>
+                                </div>
+                                <div class="form__group">
+                                    <label for="car-brand">Brand *</label>
+                                    <input type="text" id="car-brand" name="car-brand" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form__group">
+                                    <label for="car-price">Price *</label>
+                                    <input type="number" id="car-price" name="car-price" required>
+                                </div>
+                                <div class="form__group">
+                                    <label for="car-category">Category *</label>
+                                    <select id="car-category" name="car-category" required>
+                                        <option value="commercial">Commercial Cars</option>
+                                        <option value="kit">Kit Cars</option>
+                                        <option value="special-vans">Special Vans</option>
+                                        <option value="vans">Vans</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form__group" id="subcategory-group" style="display: none;">
+                                <label for="car-subcategory">Subcategory</label>
+                                <select id="car-subcategory" name="car-subcategory">
+                                    <option value="ambulance">Ambulance</option>
+                                    <option value="freezer">Freezer Vans</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form__group">
+                                    <label for="car-vin">VIN *</label>
+                                    <input type="text" id="car-vin" name="car-vin" required>
+                                </div>
+                                <div class="form__group">
+                                    <label for="car-engine">Engine Number *</label>
+                                    <input type="text" id="car-engine" name="car-engine" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form__group">
+                                    <label for="car-registration">Registration No. *</label>
+                                    <input type="text" id="car-registration" name="car-registration" required>
+                                </div>
+                                <div class="form__group">
+                                    <label for="car-chassis">Chassis Number *</label>
+                                    <input type="text" id="car-chassis" name="car-chassis" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form__group">
+                                <label for="car-features">Features (comma separated)</label>
+                                <textarea id="car-features" name="car-features" rows="3" placeholder="Feature 1, Feature 2, Feature 3"></textarea>
+                            </div>
+                            
+                            <div class="form__group">
+                                <label for="car-description">Description</label>
+                                <textarea id="car-description" name="car-description" rows="4" placeholder="Vehicle description..."></textarea>
+                            </div>
+                            
+                            <div class="form__group">
+                                <label for="car-images">Images (Multiple)</label>
+                                <input type="file" id="car-images" name="car-images" multiple accept="image/*">
+                                <div id="image-preview" class="image-preview"></div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn--primary">Publish Vehicle</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div id="hidden-tab" class="tab-pane">
+                        <h2>Add New Vehicle (Hidden)</h2>
+                        <form id="hidden-car-form" class="admin-form">
+                            <div class="form-row">
+                                <div class="form__group">
+                                    <label for="hidden-car-name">Vehicle Name *</label>
+                                    <input type="text" id="hidden-car-name" name="car-name" required>
+                                </div>
+                                <div class="form__group">
+                                    <label for="hidden-car-brand">Brand *</label>
+                                    <input type="text" id="hidden-car-brand" name="car-brand" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form__group">
+                                    <label for="hidden-car-price">Price *</label>
+                                    <input type="number" id="hidden-car-price" name="car-price" required>
+                                </div>
+                                <div class="form__group">
+                                    <label for="hidden-car-category">Category *</label>
+                                    <select id="hidden-car-category" name="car-category" required>
+                                        <option value="commercial">Commercial Cars</option>
+                                        <option value="kit">Kit Cars</option>
+                                        <option value="special-vans">Special Vans</option>
+                                        <option value="vans">Vans</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form__group" id="hidden-subcategory-group" style="display: none;">
+                                <label for="hidden-car-subcategory">Subcategory</label>
+                                <select id="hidden-car-subcategory" name="car-subcategory">
+                                    <option value="ambulance">Ambulance</option>
+                                    <option value="freezer">Freezer Vans</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form__group">
+                                    <label for="hidden-car-vin">VIN *</label>
+                                    <input type="text" id="hidden-car-vin" name="car-vin" required>
+                                </div>
+                                <div class="form__group">
+                                    <label for="hidden-car-engine">Engine Number *</label>
+                                    <input type="text" id="hidden-car-engine" name="car-engine" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form__group">
+                                    <label for="hidden-car-registration">Registration No. *</label>
+                                    <input type="text" id="hidden-car-registration" name="car-registration" required>
+                                </div>
+                                <div class="form__group">
+                                    <label for="hidden-car-chassis">Chassis Number *</label>
+                                    <input type="text" id="hidden-car-chassis" name="car-chassis" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form__group">
+                                <label for="hidden-car-features">Features (comma separated)</label>
+                                <textarea id="hidden-car-features" name="car-features" rows="3" placeholder="Feature 1, Feature 2, Feature 3"></textarea>
+                            </div>
+                            
+                            <div class="form__group">
+                                <label for="hidden-car-description">Description</label>
+                                <textarea id="hidden-car-description" name="car-description" rows="4" placeholder="Vehicle description..."></textarea>
+                            </div>
+                            
+                            <div class="form__group">
+                                <label for="hidden-car-images">Images (Multiple)</label>
+                                <input type="file" id="hidden-car-images" name="car-images" multiple accept="image/*">
+                                <div id="hidden-image-preview" class="image-preview"></div>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn--primary">Save as Hidden</button>
+                            </div>
+                        </form>
+                        
+                        <div class="hidden-cars-list">
+                            <h3>Hidden Vehicles</h3>
+                            <div id="hidden-cars-container">
+                                <!-- Hidden cars will be listed here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <h3>Stark TH</h3>
+                    <p>Your trusted partner for premium vehicles. We are committed to excellence and customer satisfaction.</p>
+                </div>
+                <div class="footer__section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="models.html">Models</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Auto Plaza, Motor City</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@starkth.com</p>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2025 Stark TH. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- QR Code Modal -->
+    <div class="modal" id="qr-modal">
+        <div class="modal__content glass qr-modal">
+            <span class="modal__close">&times;</span>
+            <h2 class="modal-title">QR Code</h2>
+            <div id="qr-code" class="qr-code">
+                <!-- QR code will be generated here -->
+            </div>
+            <div id="debug-info" style="display: block; margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; font-size: 14px; text-align: left;">
+                <strong>Debug Information:</strong>
+                <div id="debug-content" style="margin-top: 10px; font-family: monospace; font-size: 12px;"></div>
+            </div>
+            <div class="qr-actions">
+                <button class="btn btn--primary" id="download-qr">Download QR Code</button>
+                <button class="btn btn--secondary" id="close-qr">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Logout Floating Button -->
+    <div class="admin-float">
+        <button class="admin-btn" id="admin-logout-btn" title="Logout">
+            <i class="fas fa-sign-out-alt"></i>
+        </button>
+    </div>
+
+    <!-- Simple QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

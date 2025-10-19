@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us | Stark TH</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/contact.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -15,16 +16,15 @@
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
                     <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
-                    <li class="nav__item"><a href="inventory.html" class="nav__link">Inventory</a></li>
+                    <li class="nav__item"><a href="models.html" class="nav__link">Models</a></li>
                     <li class="nav__item"><a href="services.html" class="nav__link">Services</a></li>
                     <li class="nav__item"><a href="contact.html" class="nav__link active">Contact</a></li>
+                    <li class="nav__item" id="admin-nav-item" style="display: none;">
+                        <a href="#" class="nav__link admin-indicator">
+                            <i class="fas fa-user-shield"></i> Admin
+                        </a>
+                    </li>
                 </ul>
-                <div class="nav__compare">
-                    <a href="inventory.html#comparison-section" class="compare-trigger">
-                        <i class="fas fa-balance-scale"></i>
-                        Compare (<span id="compare-count">0</span>)
-                    </a>
-                </div>
             </div>
             <div class="nav__toggle" id="nav-toggle">
                 <i class="fa fa-bars"></i>
@@ -165,7 +165,7 @@
                     <h3>Quick Links</h3>
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="inventory.html">Inventory</a></li>
+                        <li><a href="models.html">Models</a></li>
                         <li><a href="services.html">Services</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
@@ -193,7 +193,6 @@
         </a>
     </div>
 
-    <script src="js/script.js"></script>
-    <script src="js/form-handler.js"></script>
+    <script src="js/contact-script.js"></script>
 </body>
 </html>

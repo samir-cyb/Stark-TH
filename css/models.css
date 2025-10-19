@@ -1,0 +1,1020 @@
+/* Models Page Specific Styles */
+
+/* Models Hero */
+.models-hero {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    color: var(--color-white);
+    padding: 140px 0 80px;
+    text-align: center;
+}
+
+.models-title {
+    font-size: clamp(2.5rem, 5vw, 3rem);
+    margin-bottom: 1rem;
+    color: var(--color-white);
+}
+
+.models-subtitle {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Admin Controls */
+.admin-controls {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    backdrop-filter: blur(10px);
+}
+
+.admin-controls-container h3 {
+    color: var(--color-white);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.admin-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.admin-buttons .btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 200px;
+    justify-content: center;
+}
+
+/* Fix for Manage Hidden Vehicles button text color */
+#manage-hidden-btn {
+    color: var(--color-white) !important;
+}
+
+#manage-hidden-btn:hover {
+    color: var(--color-white) !important;
+    opacity: 0.9;
+}
+
+/* Admin Indicator in Navigation */
+.admin-indicator {
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: #ffeb3b !important;
+    font-weight: 600;
+}
+
+.admin-indicator i {
+    color: #ffeb3b;
+}
+
+/* No Category Selected Message */
+.no-category-message {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #666;
+}
+
+.no-category-message i {
+    font-size: 4rem;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+}
+
+.no-category-message h3 {
+    color: var(--color-primary-dark);
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.no-category-message p {
+    font-size: 1.1rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Categories Section */
+.categories-section {
+    background-color: var(--color-white);
+}
+
+.categories-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.category-card {
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    border: 3px solid transparent;
+    width: 220px;
+    flex-shrink: 0;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    border-color: var(--color-primary);
+}
+
+.category-card.active {
+    border-color: var(--color-primary);
+}
+
+.category-image {
+    width: 100%;
+    height: 140px;
+    overflow: hidden;
+}
+
+.category-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.category-card:hover .category-image img {
+    transform: scale(1.05);
+}
+
+.category-card h3 {
+    padding: 1rem;
+    text-align: center;
+    color: var(--color-primary-dark);
+    margin: 0;
+    font-size: 1.2rem;
+    background: rgba(95, 158, 160, 0.05);
+}
+
+/* Subcategories Container */
+.subcategories-container {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: rgba(95, 158, 160, 0.05);
+    border-radius: var(--border-radius);
+    text-align: center;
+}
+
+.subcategories-container h3 {
+    color: var(--color-primary-dark);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.subcategories-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.subcategory-card {
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    cursor: pointer;
+    border: 3px solid transparent;
+    width: 180px;
+    flex-shrink: 0;
+}
+
+.subcategory-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-primary);
+}
+
+.subcategory-card.active {
+    border-color: var(--color-primary);
+}
+
+.subcategory-image {
+    width: 100%;
+    height: 120px;
+    overflow: hidden;
+}
+
+.subcategory-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.subcategory-card:hover .subcategory-image img {
+    transform: scale(1.05);
+}
+
+.subcategory-card h4 {
+    padding: 0.8rem;
+    text-align: center;
+    color: var(--color-primary-dark);
+    margin: 0;
+    font-size: 1.1rem;
+    background: rgba(95, 158, 160, 0.05);
+}
+
+/* Product Showcase */
+.showcase {
+    background-color: var(--color-background);
+}
+
+.showcase__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+/* Product Card */
+.product-card {
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    box-shadow: var(--shadow);
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.product-card__image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.product-card__content {
+    padding: 1.5rem;
+}
+
+.product-card__title {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-primary-dark);
+    line-height: 1.3;
+}
+
+.product-card__price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.product-card__features {
+    list-style: none;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: #666;
+    padding: 0;
+}
+
+.product-card__features li {
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.product-card__features li i {
+    color: var(--color-primary);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.product-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.product-card__btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 0.6rem 1rem;
+    text-align: center;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.9rem;
+}
+
+.btn--primary {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+.btn--primary:hover {
+    background: var(--color-primary-dark);
+}
+
+.btn--secondary {
+    background: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+}
+
+.btn--secondary:hover {
+    background: rgba(95, 158, 160, 0.1);
+}
+
+.btn--danger {
+    background: #e74c3c;
+    color: var(--color-white);
+    border: none;
+}
+
+.btn--danger:hover {
+    background: #c0392b;
+}
+
+/* Admin Action Buttons on Product Cards */
+.product-card__admin-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.product-card:hover .product-card__admin-actions {
+    opacity: 1;
+}
+
+.admin-action-btn {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.edit-btn {
+    background: var(--color-primary);
+    color: white;
+}
+
+.edit-btn:hover {
+    background: var(--color-primary-dark);
+}
+
+.delete-btn {
+    background: #e74c3c;
+    color: white;
+}
+
+.delete-btn:hover {
+    background: #c0392b;
+}
+
+/* Floating Chat Button */
+.floating-chat {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.floating-chat a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 1.5rem;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.floating-chat a:hover {
+    background: var(--color-primary-dark);
+    transform: scale(1.1);
+}
+
+/* Admin Login/Logout Floating Button */
+.admin-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+}
+
+.admin-btn {
+    width: 60px;
+    height: 60px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-btn:hover {
+    background: var(--color-primary-dark);
+    transform: scale(1.1);
+}
+
+/* Modals */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modal__content {
+    position: relative;
+    margin: 5% auto;
+    padding: 2rem;
+    width: 90%;
+    max-width: 600px;
+    animation: modalFade 0.3s;
+    max-height: 85vh;
+    overflow-y: auto;
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+}
+
+.modal__content.large {
+    max-width: 900px;
+}
+
+.modal__close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+    transition: var(--transition);
+    z-index: 10;
+    background: none;
+    border: none;
+}
+
+.modal__close:hover {
+    color: var(--color-text);
+}
+
+@keyframes modalFade {
+    from {opacity: 0; transform: translateY(-50px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* Vehicle Form Styles */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form__group {
+    margin-bottom: 1.5rem;
+}
+
+.form__group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.form__group input,
+.form__group select,
+.form__group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: var(--transition);
+    background: var(--color-white);
+    color: var(--color-text);
+    font-family: inherit;
+}
+
+.form__group input:focus,
+.form__group select:focus,
+.form__group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(95, 158, 160, 0.2);
+}
+
+.form-actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Hidden Vehicles List */
+.hidden-vehicles-list {
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.hidden-vehicle-item {
+    background: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.hidden-vehicle-info h4 {
+    margin-bottom: 0.5rem;
+    color: var(--color-primary-dark);
+    font-size: 1.2rem;
+}
+
+.hidden-vehicle-info p {
+    margin: 0.3rem 0;
+    color: #666;
+}
+
+.hidden-vehicle-actions {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.qr-btn {
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.qr-btn:hover {
+    background: var(--color-primary-dark);
+}
+
+.hidden-delete-btn {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.hidden-delete-btn:hover {
+    background: #c0392b;
+}
+
+.publish-btn {
+    background: #27ae60;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.publish-btn:hover {
+    background: #219653;
+}
+
+/* QR Code Modal */
+.qr-modal .modal__content {
+    text-align: center;
+}
+
+.qr-code {
+    margin: 1rem auto;
+    padding: 1rem;
+    background: white;
+    display: inline-block;
+    border-radius: 8px;
+}
+
+.qr-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Scrollbar styling */
+.modal__content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.modal__content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.modal__content::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 10px;
+}
+
+.modal__content::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary-dark);
+}
+
+/* Details Modal Styles */
+.details-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.details-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.details-main-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+
+.details-thumbnails {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.details-thumbnail {
+    width: 80px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: var(--transition);
+}
+
+.details-thumbnail.active,
+.details-thumbnail:hover {
+    border-color: var(--color-primary);
+}
+
+.details-info h2 {
+    color: var(--color-primary-dark);
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.details-price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 1.5rem;
+}
+
+.vehicle-description {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.details-specs {
+    margin-bottom: 2rem;
+}
+
+.details-specs h3 {
+    color: var(--color-primary-dark);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.details-specs ul {
+    list-style: none;
+    padding: 0;
+}
+
+.details-specs li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.details-specs li span:first-child {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.details-specs li span:last-child {
+    color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .showcase__container {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .categories-grid {
+        gap: 1rem;
+    }
+    
+    .category-card {
+        width: 200px;
+    }
+    
+    .subcategory-card {
+        width: 160px;
+    }
+}
+
+@media (max-width: 768px) {
+    .models-hero {
+        padding: 120px 0 60px;
+    }
+    
+    .showcase__container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .details-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .modal__content {
+        width: 95%;
+        margin: 10% auto;
+        padding: 1.5rem;
+    }
+    
+    .categories-grid {
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    .category-card {
+        width: 160px;
+    }
+    
+    .category-image {
+        height: 120px;
+    }
+    
+    .subcategory-card {
+        width: 140px;
+    }
+    
+    .subcategory-image {
+        height: 100px;
+    }
+    
+    .admin-float {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .admin-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+    
+    .floating-chat {
+        bottom: 20px;
+        left: 20px;
+    }
+    
+    .floating-chat a {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .admin-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .admin-buttons .btn {
+        min-width: 100%;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .form-actions .btn {
+        width: 100%;
+    }
+    
+    .hidden-vehicle-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .hidden-vehicle-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    
+    .product-card__admin-actions {
+        opacity: 1;
+    }
+    
+    .details-main-image {
+        height: 250px;
+    }
+    
+    .details-thumbnail {
+        width: 70px;
+        height: 50px;
+    }
+    
+    .details-info h2 {
+        font-size: 1.5rem;
+    }
+    
+    .details-price {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .categories-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .category-card {
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .subcategories-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .subcategory-card {
+        width: 100%;
+        max-width: 240px;
+    }
+    
+    .product-card__content {
+        padding: 1rem;
+    }
+    
+    .product-card__title {
+        font-size: 1.2rem;
+    }
+    
+    .product-card__price {
+        font-size: 1.3rem;
+    }
+    
+    .product-card__actions {
+        flex-direction: column;
+    }
+    
+    .product-card__btn {
+        min-width: 100%;
+    }
+    
+    .modal__content {
+        width: 98%;
+        margin: 5% auto;
+        padding: 1rem;
+    }
+    
+    .modal__content.large {
+        margin: 2% auto;
+    }
+    
+    .admin-controls {
+        padding: 1.5rem;
+    }
+    
+    .admin-controls-container h3 {
+        font-size: 1.3rem;
+    }
+    
+    .no-category-message {
+        padding: 3rem 1rem;
+    }
+    
+    .no-category-message i {
+        font-size: 3rem;
+    }
+    
+    .no-category-message h3 {
+        font-size: 1.5rem;
+    }
+    
+    .details-thumbnails {
+        justify-content: center;
+    }
+    
+    .hidden-vehicle-actions {
+        justify-content: center;
+    }
+    
+    .hidden-vehicle-actions .btn {
+        flex: 1;
+        min-width: 100px;
+    }
+}
+
+/* Touch device improvements */
+@media (hover: none) and (pointer: coarse) {
+    .product-card__admin-actions {
+        opacity: 1;
+    }
+    
+    .category-card:hover,
+    .subcategory-card:hover,
+    .product-card:hover {
+        transform: none;
+    }
+    
+    .admin-action-btn,
+    .product-card__btn,
+    .qr-btn,
+    .publish-btn,
+    .hidden-delete-btn {
+        min-height: 44px;
+    }
+}

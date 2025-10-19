@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Models | Stark TH</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/models.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">Stark TH</a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="index.html" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="models.html" class="nav__link active">Models</a></li>
+                    <li class="nav__item"><a href="services.html" class="nav__link">Services</a></li>
+                    <li class="nav__item"><a href="contact.html" class="nav__link">Contact</a></li>
+                    <li class="nav__item" id="admin-nav-item" style="display: none;">
+                        <a href="#" class="nav__link admin-indicator">
+                            <i class="fas fa-user-shield"></i> Admin
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="fa fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Models Hero -->
+        <section class="models-hero section">
+            <div class="container">
+                <h1 class="models-title">Our Vehicle Models</h1>
+                <p class="models-subtitle">Explore our wide range of premium vehicles across different categories</p>
+                
+                <!-- Admin Controls (Visible only when logged in) -->
+                <div id="admin-controls" class="admin-controls" style="display: none;">
+                    <div class="admin-controls-container">
+                        <h3>Admin Controls</h3>
+                        <div class="admin-buttons">
+                            <button class="btn btn--primary" id="add-vehicle-btn">
+                                <i class="fas fa-plus"></i> Add New Vehicle
+                            </button>
+                            <button class="btn btn--secondary" id="manage-hidden-btn">
+                                <i class="fas fa-eye-slash"></i> Manage Hidden Vehicles
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vehicle Categories -->
+        <section class="categories-section section">
+            <div class="container">
+                <h2 class="section__title">Browse by Category</h2>
+                <div class="categories-grid">
+                    <div class="category-card" data-category="commercial">
+                        <div class="category-image">
+                            <img src="https://images.unsplash.com/photo-1558618666-fcd25856cd23?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Commercial Cars">
+                        </div>
+                        <h3>Commercial Cars</h3>
+                    </div>
+                    <div class="category-card" data-category="kit">
+                        <div class="category-image">
+                            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Kit Cars">
+                        </div>
+                        <h3>Kit Cars</h3>
+                    </div>
+                    <div class="category-card" data-category="special-vans">
+                        <div class="category-image">
+                            <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Special Vans">
+                        </div>
+                        <h3>Special Vans</h3>
+                    </div>
+                    <div class="category-card" data-category="vans">
+                        <div class="category-image">
+                            <img src="https://images.unsplash.com/photo-1563720223485-405d5ff12e9d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Vans">
+                        </div>
+                        <h3>Vans</h3>
+                    </div>
+                </div>
+                
+                <!-- Special Vans Subcategories (hidden by default) -->
+                <div class="subcategories-container" id="special-vans-subcategories" style="display: none;">
+                    <h3>Special Vans</h3>
+                    <div class="subcategories-grid">
+                        <div class="subcategory-card" data-subcategory="ambulance">
+                            <div class="subcategory-image">
+                                <img src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Ambulance">
+                            </div>
+                            <h4>Ambulance</h4>
+                        </div>
+                        <div class="subcategory-card" data-subcategory="freezer">
+                            <div class="subcategory-image">
+                                <img src="https://images.unsplash.com/photo-1558618666-fcd25856cd23?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Freezer Vans">
+                            </div>
+                            <h4>Freezer Vans</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Showcase Section -->
+        <section class="showcase section">
+            <div class="container">
+                <h2 class="section__title" id="category-title">Select a Category to View Vehicles</h2>
+                <div id="no-category-selected" class="no-category-message">
+                    <i class="fas fa-car-side"></i>
+                    <h3>Browse Our Categories</h3>
+                    <p>Please select a category from above to view available vehicles</p>
+                </div>
+                <div class="showcase__container" id="showcase-container" style="display: none;">
+                    <!-- Product cards will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <h3>Stark TH</h3>
+                    <p>Your trusted partner for premium vehicles. We are committed to excellence and customer satisfaction.</p>
+                </div>
+                <div class="footer__section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="models.html">Models</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Auto Plaza, Motor City</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> info@starkth.com</p>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2025 Stark TH. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Chat Button -->
+    <div class="floating-chat">
+        <a href="https://your-facebook-group-link" target="_blank" aria-label="Chat with us on Facebook">
+            <i class="fab fa-facebook-messenger"></i>
+        </a>
+        <a href="https://wa.me/your-number" target="_blank" aria-label="Chat with us on WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- Admin Login/Logout Floating Button -->
+    <div class="admin-float">
+        <button class="admin-btn" id="admin-login-btn" title="Admin Login">
+            <i class="fas fa-user-cog"></i>
+        </button>
+    </div>
+
+    <!-- Modals -->
+    <!-- Order Options Modal -->
+    <div class="modal" id="order-modal">
+        <div class="modal__content glass">
+            <span class="modal__close">&times;</span>
+            <h2 class="modal-title">Request Information</h2>
+            <form id="order-form">
+                <input type="hidden" id="order-car-id">
+                <div class="form__group">
+                    <label for="order-name">Full Name</label>
+                    <input type="text" id="order-name" name="name" required>
+                </div>
+                <div class="form__group">
+                    <label for="order-email">Email Address</label>
+                    <input type="email" id="order-email" name="email" required>
+                </div>
+                <div class="form__group">
+                    <label for="order-phone">Phone Number</label>
+                    <input type="tel" id="order-phone" name="phone" required>
+                </div>
+                <div class="form__group">
+                    <label for="order-message">Your Questions/Requirements</label>
+                    <textarea id="order-message" name="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn btn--primary modal-submit">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- View Details Modal -->
+    <div class="modal" id="details-modal">
+        <div class="modal__content glass large">
+            <span class="modal__close">&times;</span>
+            <div class="details-content" id="details-content">
+                <!-- Details content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div class="modal" id="admin-login-modal">
+        <div class="modal__content glass">
+            <span class="modal__close">&times;</span>
+            <h2 class="modal-title">Admin Login</h2>
+            <form id="admin-login-form">
+                <div class="form__group">
+                    <label for="admin-username">Username</label>
+                    <input type="text" id="admin-username" name="username" required>
+                </div>
+                <div class="form__group">
+                    <label for="admin-password">Password</label>
+                    <input type="password" id="admin-password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn--primary modal-submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add/Edit Vehicle Modal -->
+    <div class="modal" id="vehicle-form-modal">
+        <div class="modal__content glass large">
+            <span class="modal__close">&times;</span>
+            <h2 class="modal-title" id="vehicle-form-title">Add New Vehicle</h2>
+            <form id="vehicle-form">
+                <input type="hidden" id="vehicle-id">
+                <input type="hidden" id="vehicle-action" value="add">
+                
+                <div class="form-row">
+                    <div class="form__group">
+                        <label for="vehicle-name">Vehicle Name *</label>
+                        <input type="text" id="vehicle-name" name="vehicle-name" required>
+                    </div>
+                    <div class="form__group">
+                        <label for="vehicle-brand">Brand *</label>
+                        <input type="text" id="vehicle-brand" name="vehicle-brand" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form__group">
+                        <label for="vehicle-price">Price *</label>
+                        <input type="number" id="vehicle-price" name="vehicle-price" required>
+                    </div>
+                    <div class="form__group">
+                        <label for="vehicle-category">Category *</label>
+                        <select id="vehicle-category" name="vehicle-category" required>
+                            <option value="commercial">Commercial Cars</option>
+                            <option value="kit">Kit Cars</option>
+                            <option value="special-vans">Special Vans</option>
+                            <option value="vans">Vans</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form__group" id="vehicle-subcategory-group" style="display: none;">
+                    <label for="vehicle-subcategory">Subcategory</label>
+                    <select id="vehicle-subcategory" name="vehicle-subcategory">
+                        <option value="ambulance">Ambulance</option>
+                        <option value="freezer">Freezer Vans</option>
+                    </select>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form__group">
+                        <label for="vehicle-vin">VIN *</label>
+                        <input type="text" id="vehicle-vin" name="vehicle-vin" required>
+                    </div>
+                    <div class="form__group">
+                        <label for="vehicle-engine">Engine Number *</label>
+                        <input type="text" id="vehicle-engine" name="vehicle-engine" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form__group">
+                        <label for="vehicle-registration">Registration No. *</label>
+                        <input type="text" id="vehicle-registration" name="vehicle-registration" required>
+                    </div>
+                    <div class="form__group">
+                        <label for="vehicle-chassis">Chassis Number *</label>
+                        <input type="text" id="vehicle-chassis" name="vehicle-chassis" required>
+                    </div>
+                </div>
+                
+                <div class="form__group">
+                    <label for="vehicle-features">Features (comma separated)</label>
+                    <textarea id="vehicle-features" name="vehicle-features" rows="3" placeholder="Feature 1, Feature 2, Feature 3"></textarea>
+                </div>
+                
+                <div class="form__group">
+                    <label for="vehicle-description">Description</label>
+                    <textarea id="vehicle-description" name="vehicle-description" rows="4" placeholder="Vehicle description..."></textarea>
+                </div>
+                
+                <div class="form__group">
+                    <label for="vehicle-images">Images URL (comma separated)</label>
+                    <textarea id="vehicle-images" name="vehicle-images" rows="3" placeholder="https://image1.jpg, https://image2.jpg"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn--primary" id="vehicle-publish-btn">Publish Vehicle</button>
+                    <button type="button" class="btn btn--secondary" id="vehicle-hidden-btn">Save as Hidden</button>
+                    <button type="button" class="btn btn--danger" id="vehicle-delete-btn" style="display: none;">Delete Vehicle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hidden Vehicles Modal -->
+    <div class="modal" id="hidden-vehicles-modal">
+        <div class="modal__content glass large">
+            <span class="modal__close">&times;</span>
+            <h2 class="modal-title">Hidden Vehicles</h2>
+            <div class="hidden-vehicles-list">
+                <div id="hidden-vehicles-container">
+                    <!-- Hidden vehicles will be listed here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Code Modal -->
+    <div class="modal" id="qr-modal">
+        <div class="modal__content glass qr-modal">
+            <span class="modal__close">&times;</span>
+            <h2 class="modal-title">QR Code</h2>
+            <div id="qr-code" class="qr-code">
+                <!-- QR code will be generated here -->
+            </div>
+            <div class="debug-info" id="debug-info" style="display: none; margin-top: 10px; padding: 10px; background: #f5f5f5; border-radius: 5px; font-size: 12px;">
+                <strong>Debug Info:</strong>
+                <div id="debug-content"></div>
+            </div>
+            <div class="qr-actions">
+                <button class="btn btn--primary" id="download-qr">Download QR Code</button>
+                <button class="btn btn--secondary" id="close-qr">Close</button>
+            </div>
+        </div>
+    </div>
+    
+  
+    <!-- Replace with a better QR code library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/models.js"></script>
+</body>
+</html>

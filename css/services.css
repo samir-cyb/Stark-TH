@@ -4,14 +4,22 @@
 .services-hero {
     background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
     color: var(--color-white);
-    padding-top: 120px;
+    padding: 140px 0 80px;
     text-align: center;
 }
 
+.services-hero .section__title {
+    color: var(--color-white) !important;
+    margin-bottom: 1rem;
+}
+
 .services-subtitle {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 2vw, 1.2rem);
     margin-bottom: 2rem;
     opacity: 0.9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Services Overview */
@@ -29,6 +37,9 @@
     padding: 2rem;
     text-align: center;
     transition: transform 0.3s ease;
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
 }
 
 .service-card:hover {
@@ -65,6 +76,7 @@
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    line-height: 1.6;
 }
 
 .partners-grid {
@@ -76,6 +88,9 @@
 .partner-card {
     padding: 2rem;
     transition: transform 0.3s ease;
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
 }
 
 .partner-card:hover {
@@ -144,11 +159,13 @@
 
 .benefit-item h3 i {
     color: var(--color-primary);
+    flex-shrink: 0;
 }
 
 .benefit-item p {
     color: #666;
     margin-left: 1.8rem;
+    line-height: 1.6;
 }
 
 .benefits-image img {
@@ -158,17 +175,141 @@
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+    .services-grid,
+    .partners-grid {
+        gap: 1.5rem;
+    }
+    
+    .benefits-content {
+        gap: 3rem;
+    }
+}
+
 @media (max-width: 768px) {
+    .services-hero {
+        padding: 120px 0 60px;
+    }
+    
+    .services-grid,
+    .partners-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .service-card,
+    .partner-card {
+        padding: 1.5rem;
+    }
+    
+    .service-icon {
+        font-size: 2.5rem;
+    }
+    
+    .service-card h3,
+    .partner-card h3 {
+        font-size: 1.3rem;
+    }
+    
+    .benefits-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .benefits-image {
+        order: -1;
+    }
+    
+    .benefit-item h3 {
+        font-size: 1.1rem;
+    }
+    
+    .benefit-item p {
+        margin-left: 1.5rem;
+    }
+    
+    .partner-logo {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
     .services-grid,
     .partners-grid {
         grid-template-columns: 1fr;
     }
     
-    .benefits-content {
-        grid-template-columns: 1fr;
+    .service-card,
+    .partner-card {
+        padding: 1.25rem;
+        margin: 0 0.5rem;
     }
     
-    .benefits-image {
-        order: -1;
+    .service-icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .partner-logo {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+    
+    .service-card h3,
+    .partner-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .service-card p,
+    .partner-card p {
+        font-size: 0.9rem;
+    }
+    
+    .benefit-item h3 {
+        font-size: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .benefit-item p {
+        margin-left: 0;
+    }
+    
+    .brand-tag {
+        font-size: 0.8rem;
+        padding: 0.25rem 0.6rem;
+    }
+    
+    .partners-subtitle {
+        font-size: 1rem;
+        padding: 0 1rem;
+    }
+}
+
+/* Animation for service cards */
+@media (prefers-reduced-motion: no-preference) {
+    .service-card,
+    .partner-card {
+        animation: fadeInUp 0.6s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .service-card:hover,
+    .partner-card:hover {
+        transform: none;
     }
 }
