@@ -573,3 +573,17 @@
         border: 1px solid #000 !important;
     }
 }
+
+/* Force white color for contact info icons */
+.info-icon i,
+.info-icon .fas,
+.info-icon .fa {
+    color: #ffffff !important;
+}
+
+/* Ensure hover states also maintain white color */
+.info__item:hover .info-icon i,
+.info__item:hover .info-icon .fas,
+.info__item:hover .info-icon .fa {
+    color: #ffffff !important;
+}
