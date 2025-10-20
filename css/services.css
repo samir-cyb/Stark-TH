@@ -76,18 +76,22 @@
     line-height: 1.6;
 }
 
+/* FIXED: Flags Container for Mobile */
 .flags-container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 1.5rem;
     margin-bottom: 2rem;
+    padding: 0 1rem;
 }
 
 .flag-item {
     text-align: center;
     cursor: pointer;
     transition: transform 0.3s ease;
+    flex: 0 0 auto;
+    min-width: 80px;
 }
 
 .flag-item:hover {
@@ -98,13 +102,24 @@
     transform: scale(1.1);
 }
 
+/* Zoom out Australia flag image only */
+.flag-item[data-country="australia"] .flag-icon-img {
+    transform: scale(0.85);
+    object-fit: contain;
+}
+
+/* Adjust Bangladesh flag position */
+.flag-item[data-country="bangladesh"] .flag-icon-img {
+    transform: translateX(5px);
+}
+
 /* Flag Image Styles */
 .flag-icon-img {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     object-fit: cover;
-    margin: 0 auto 1rem;
+    margin: 0 auto 0.8rem;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     border: 2px solid #eee;
     transition: all 0.3s ease;
@@ -122,6 +137,11 @@
 .flag-name {
     font-weight: 600;
     color: var(--color-primary-dark);
+    font-size: 0.9rem;
+    line-height: 1.2;
+    word-wrap: break-word;
+    max-width: 80px;
+    margin: 0 auto;
 }
 
 .companies-container {
@@ -138,17 +158,18 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.8rem;
 }
 
 .company-item {
     background: var(--color-white);
-    padding: 0.8rem 1.5rem;
+    padding: 0.6rem 1.2rem;
     border-radius: 30px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     font-weight: 500;
     color: var(--color-primary-dark);
     transition: transform 0.2s ease;
+    font-size: 0.9rem;
 }
 
 .company-item:hover {
@@ -199,7 +220,7 @@
     box-shadow: var(--shadow);
 }
 
-/* Responsive Design */
+/* Responsive Design - FIXED MOBILE VIEW */
 @media (max-width: 1024px) {
     .services-row {
         gap: 1.5rem;
@@ -207,6 +228,10 @@
     
     .benefits-content {
         gap: 3rem;
+    }
+    
+    .flags-container {
+        gap: 1.5rem;
     }
 }
 
@@ -249,9 +274,32 @@
         margin-left: 1.5rem;
     }
     
+    /* FIXED: Mobile flags layout */
+    .flags-container {
+        gap: 1rem;
+        padding: 0 0.5rem;
+        justify-content: space-around;
+    }
+    
+    .flag-item {
+        min-width: 70px;
+        flex: 0 0 auto;
+    }
+    
     .flag-icon-img {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
+    }
+    
+    .flag-name {
+        font-size: 0.8rem;
+        max-width: 70px;
+    }
+    
+    .partners-subtitle {
+        font-size: 1rem;
+        padding: 0 1rem;
+        margin-bottom: 2rem;
     }
 }
 
@@ -285,23 +333,69 @@
         margin-left: 0;
     }
     
+    /* FIXED: Extra small screens */
     .flags-container {
-        gap: 1rem;
+        gap: 0.8rem;
+        padding: 0 0.5rem;
+    }
+    
+    .flag-item {
+        min-width: 65px;
     }
     
     .flag-icon-img {
-        width: 60px;
-        height: 60px;
+        width: 55px;
+        height: 55px;
+    }
+    
+    .flag-name {
+        font-size: 0.75rem;
+        max-width: 65px;
     }
     
     .companies-list {
         flex-direction: column;
         align-items: center;
+        gap: 0.6rem;
     }
     
     .company-item {
-        width: 80%;
+        width: 90%;
         text-align: center;
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .companies-container {
+        padding: 1rem;
+        margin-top: 1.5rem;
+    }
+    
+    .companies-container h3 {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* Very small mobile devices */
+@media (max-width: 360px) {
+    .flags-container {
+        gap: 0.5rem;
+        padding: 0 0.25rem;
+    }
+    
+    .flag-item {
+        min-width: 60px;
+    }
+    
+    .flag-icon-img {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .flag-name {
+        font-size: 0.7rem;
+        max-width: 60px;
     }
 }
 
@@ -337,15 +431,8 @@
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         border-color: #eee;
     }
-}
-
-/* Alternative: Use object-position for more precise control */
-.flag-item[data-country="australia"] .flag-icon-img {
-    object-position: -5px center; /* Move Australia image 5px left */
-    transform: scale(0.95); /* Zoom out 10% */
     
-}
-
-.flag-item[data-country="bangladesh"] .flag-icon-img {
-    object-position: -20px center; /* Move Bangladesh image 5px right */
+    .flag-item.active .flag-icon-img {
+        box-shadow: 0 0 0 3px var(--color-primary), 0 6px 12px rgba(0,0,0,0.15);
+    }
 }
