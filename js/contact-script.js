@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (navToggle && navMenu) {
         navToggle.addEventListener('click', function(e) {
-            e.stopPropagation(); // Prevent event bubbling
+            e.stopPropagation();
             navMenu.classList.toggle('active');
             body.classList.toggle('nav-open');
         });
@@ -53,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 header.style.background = 'rgba(95, 158, 160, 0.98)';
                 header.style.backdropFilter = 'blur(20px)';
                 
-                // Hide header on scroll down, show on scroll up
                 if (window.scrollY > lastScrollY && window.scrollY > 100) {
                     header.style.transform = 'translateY(-100%)';
                 } else {
@@ -75,10 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize contact form
     initContactForm();
     
-    // Add touch device optimizations
-    if (isMobileDevice()) {
-        initMobileOptimizations();
-    }
+    console.log('✅ Contact form JavaScript loaded successfully');
 });
 
 // Update admin navigation on all pages
@@ -100,27 +96,43 @@ function initContactForm() {
     const contactForm = document.getElementById('contactForm');
     
     if (contactForm) {
+        console.log('📝 Contact form found, initializing...');
+        console.log('🔗 Form action:', contactForm.action);
+        
+        // Real-time validation
+        const inputs = contactForm.querySelectorAll('input, textarea, select');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                validateField(this);
+            });
+            
+            input.addEventListener('input', function() {
+                clearFieldError(this);
+            });
+        });
+        
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
+            console.log('📨 Form submission started...');
             
-            // Get form data
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const subject = formData.get('subject');
-            const message = formData.get('message');
+            // Validate all fields before submission
+            let isValid = true;
+            inputs.forEach(input => {
+                if (!validateField(input)) {
+                    isValid = false;
+                }
+            });
             
-            // Basic validation
-            if (!name || !email || !subject || !message) {
-                showNotification('Please fill in all required fields.', 'error');
+            if (!isValid) {
+                showNotification('Please fix the errors in the form before submitting.', 'error');
                 return;
             }
             
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showNotification('Please enter a valid email address.', 'error');
-                return;
+            // Set the reply-to email dynamically
+            const emailInput = document.getElementById('email');
+            const replyToInput = document.getElementById('replyTo');
+            if (emailInput && replyToInput) {
+                replyToInput.value = emailInput.value;
             }
             
             // Show loading state
@@ -128,56 +140,161 @@ function initContactForm() {
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             submitBtn.disabled = true;
+            submitBtn.classList.add('loading');
             
-            // Simulate form submission (replace with actual API call)
-            setTimeout(() => {
-                // Reset form
-                contactForm.reset();
+            // Send form data using Formspree
+            const formData = new FormData(this);
+            
+            console.log('📤 Sending form data to Formspree...');
+            
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                console.log('📥 Response status:', response.status);
+                if (response.ok) {
+                    // Success - reset form and show success message
+                    contactForm.reset();
+                    resetFormState(contactForm);
+                    showNotification('Thank you for your message! We will get back to you within 24 hours.', 'success');
+                    console.log('✅ Form submitted successfully!');
+                    
+                    // Scroll to top to show the success message
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    // Server-side error (e.g., Formspree validation)
+                    return response.json().then(data => {
+                        let errorMessage = 'There was a problem submitting your form.';
+                        if (data.errors) {
+                            errorMessage = data.errors.map(error => error.message).join(', ');
+                        } else if (data.error) {
+                            errorMessage = data.error;
+                        }
+                        throw new Error(errorMessage);
+                    });
+                }
+            })
+            .catch(error => {
+                // Network error or other thrown error
+                console.error('❌ Form submission error:', error);
                 
-                // Reset button
+                let errorMessage = error.message || 'There was a problem sending your message. Please try again later.';
+                
+                // More specific error messages
+                if (error.message.includes('Failed to fetch')) {
+                    errorMessage = 'Network error. Please check your internet connection and try again.';
+                }
+                
+                showNotification(errorMessage, 'error');
+            })
+            .finally(() => {
+                // Reset button state
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
-                
-                // Show success message
-                showNotification('Thank you for your message! We will get back to you soon.', 'success');
-            }, 2000);
+                submitBtn.classList.remove('loading');
+                console.log('🔚 Form submission process completed');
+            });
         });
+    } else {
+        console.error('❌ Contact form not found!');
     }
 }
 
-// Initialize mobile optimizations
-function initMobileOptimizations() {
-    document.body.classList.add('touch-device');
+// Field validation function
+function validateField(field) {
+    const value = field.value.trim();
+    const fieldName = field.name;
+    const fieldType = field.type;
+    const errorElement = document.getElementById(`${field.id}-error`);
     
-    // Improve touch targets
-    const interactiveElements = document.querySelectorAll(
-        'button, .btn, .nav__link, .social-link'
-    );
+    // Clear previous error
+    clearFieldError(field);
     
-    interactiveElements.forEach(element => {
-        // Ensure minimum touch target size
-        const rect = element.getBoundingClientRect();
-        if (rect.width < 44 || rect.height < 44) {
-            element.style.minHeight = '44px';
-            element.style.minWidth = '44px';
+    // Required field validation
+    if (field.hasAttribute('required') && !value) {
+        setFieldError(field, `${field.labels[0].textContent} is required`);
+        return false;
+    }
+    
+    // Email validation
+    if (fieldType === 'email' && value) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+            setFieldError(field, 'Please enter a valid email address');
+            return false;
+        }
+    }
+    
+    // Name validation (minimum 2 characters)
+    if (fieldName === 'name' && value && value.length < 2) {
+        setFieldError(field, 'Name should be at least 2 characters long');
+        return false;
+    }
+    
+    // Message validation (minimum 10 characters)
+    if (fieldName === 'message' && value && value.length < 10) {
+        setFieldError(field, 'Message should be at least 10 characters long');
+        return false;
+    }
+    
+    // Subject validation (if it's a select field)
+    if (fieldName === 'subject' && value === '') {
+        setFieldError(field, 'Please select a subject');
+        return false;
+    }
+    
+    // If all validations pass
+    setFieldSuccess(field);
+    return true;
+}
+
+function setFieldError(field, message) {
+    field.classList.add('error');
+    field.classList.remove('success');
+    
+    const errorElement = document.getElementById(`${field.id}-error`);
+    if (errorElement) {
+        errorElement.textContent = message;
+        errorElement.className = 'form__message error';
+    }
+}
+
+function setFieldSuccess(field) {
+    field.classList.remove('error');
+    field.classList.add('success');
+    
+    const errorElement = document.getElementById(`${field.id}-error`);
+    if (errorElement) {
+        errorElement.textContent = '';
+        errorElement.className = 'form__message';
+    }
+}
+
+function clearFieldError(field) {
+    field.classList.remove('error');
+    
+    const errorElement = document.getElementById(`${field.id}-error`);
+    if (errorElement) {
+        errorElement.textContent = '';
+        errorElement.className = 'form__message';
+    }
+}
+
+// Utility function to handle form reset with better UX
+function resetFormState(form) {
+    const inputs = form.querySelectorAll('input, textarea, select');
+    inputs.forEach(input => {
+        input.classList.remove('success', 'error');
+        const errorElement = document.getElementById(`${input.id}-error`);
+        if (errorElement) {
+            errorElement.textContent = '';
+            errorElement.className = 'form__message';
         }
     });
-    
-    // Handle viewport height issues on mobile
-    function setVH() {
-        const vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
-    }
-    
-    setVH();
-    window.addEventListener('resize', setVH);
-    window.addEventListener('orientationchange', setVH);
-}
-
-// Utility function to check if device is mobile
-function isMobileDevice() {
-    return window.innerWidth <= 768 || 
-           /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
 // Show notification
@@ -256,6 +373,12 @@ function showNotification(message, type = 'info') {
                 font-size: 1.2rem;
                 cursor: pointer;
                 color: #666;
+                padding: 0;
+                width: 24px;
+                height: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
             
             @keyframes slideInRight {
@@ -282,7 +405,7 @@ function showNotification(message, type = 'info') {
     }
     
     // Auto remove after 5 seconds
-    setTimeout(() => {
+    const autoRemove = setTimeout(() => {
         if (notification.parentNode) {
             notification.style.animation = 'slideInRight 0.3s ease reverse';
             setTimeout(() => notification.remove(), 300);
@@ -291,14 +414,22 @@ function showNotification(message, type = 'info') {
     
     // Close button
     notification.querySelector('.notification-close').addEventListener('click', () => {
+        clearTimeout(autoRemove);
         notification.remove();
+    });
+    
+    // Also remove notification when clicked anywhere on it (except close button)
+    notification.addEventListener('click', (e) => {
+        if (e.target === notification) {
+            clearTimeout(autoRemove);
+            notification.remove();
+        }
     });
 }
 
 // Handle page visibility changes
 document.addEventListener('visibilitychange', function() {
     if (!document.hidden) {
-        // Page became visible, refresh admin state if needed
         updateAdminNavigation();
     }
 });

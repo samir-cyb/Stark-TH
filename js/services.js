@@ -2,9 +2,8 @@
 
 // Initialize services page
 document.addEventListener('DOMContentLoaded', function() {
-    updateComparisonCount();
     initServiceAnimations();
-    initServiceInteractions();
+    initFlagInteractions();
     
     // Handle mobile-specific initializations
     if (isMobileDevice()) {
@@ -12,26 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Update comparison count from localStorage
-function updateComparisonCount() {
-    const compareCountElement = document.getElementById('compare-count');
-    if (compareCountElement) {
-        const comparedCars = JSON.parse(localStorage.getItem('comparedCars')) || [];
-        compareCountElement.textContent = comparedCars.length;
-        
-        // Hide compare badge if count is 0
-        if (comparedCars.length === 0) {
-            compareCountElement.style.display = 'none';
-        } else {
-            compareCountElement.style.display = 'flex';
-        }
-    }
-}
-
 // Initialize service animations
 function initServiceAnimations() {
     // Add intersection observer for service cards
-    const serviceCards = document.querySelectorAll('.service-card, .partner-card');
+    const serviceCards = document.querySelectorAll('.simple-service');
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -53,55 +36,92 @@ function initServiceAnimations() {
     });
 }
 
-// Initialize service interactions
-function initServiceInteractions() {
-    // Add click handlers for service cards (for mobile touch)
-    const serviceCards = document.querySelectorAll('.service-card');
-    serviceCards.forEach(card => {
-        card.addEventListener('click', function() {
+// Initialize flag interactions
+function initFlagInteractions() {
+    const flagItems = document.querySelectorAll('.flag-item');
+    const companiesContainer = document.getElementById('companies-container');
+    
+    // Define company data for each country
+    const companiesData = {
+        australia: [
+            "Australian Automotive Group",
+            "Down Under Motors",
+            "Kangaroo Car Company",
+            "Outback Vehicles Ltd",
+            "Sydney Auto Works",
+            "Melbourne Motors"
+        ],
+        japan: [
+            "Tokyo Motors Corporation",
+            "Samurai Auto Works",
+            "Fuji Automotive",
+            "Kyoto Car Manufacturers",
+            "Osaka Vehicle Solutions",
+            "Nippon Auto Tech"
+        ],
+        uk: [
+            "British Motor Works",
+            "London Automotive Ltd",
+            "Manchester Motors",
+            "Scottish Car Company",
+            "Birmingham Auto Group",
+            "Liverpool Vehicle Solutions"
+        ],
+        bangladesh: [
+            "Dhaka Automotive",
+            "Bengal Motors",
+            "Chittagong Car Company",
+            "Bangladesh Vehicle Works",
+            "Khulna Auto Tech",
+            "Sylhet Motors Ltd"
+        ],
+        kenya: [
+            "Kenya Motors Ltd",
+            "East African Automotive",
+            "Savannah Car Company",
+            "Kenya Vehicle Works",
+            "Nairobi Auto Group",
+            "Mombasa Motors"
+        ]
+    };
+    
+    flagItems.forEach(flag => {
+        flag.addEventListener('click', function() {
+            const country = this.getAttribute('data-country');
+            const companies = companiesData[country];
+            
+            // Remove active class from all flags
+            flagItems.forEach(f => f.classList.remove('active'));
+            
+            // Add active class to clicked flag
+            this.classList.add('active');
+            
+            // Update companies container
+            if (companies && companies.length > 0) {
+                companiesContainer.innerHTML = `
+                    <h3>Our Partners in ${this.querySelector('.flag-name').textContent}</h3>
+                    <div class="companies-list">
+                        ${companies.map(company => `<div class="company-item">${company}</div>`).join('')}
+                    </div>
+                `;
+            } else {
+                companiesContainer.innerHTML = `<p>No partners found for ${this.querySelector('.flag-name').textContent}</p>`;
+            }
+            
             // Add visual feedback
-            this.style.transform = 'scale(0.98)';
+            this.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 this.style.transform = '';
             }, 150);
         });
         
         // Touch feedback for mobile
-        card.addEventListener('touchstart', function() {
-            this.style.transform = 'scale(0.98)';
+        flag.addEventListener('touchstart', function() {
+            this.style.transform = 'scale(0.95)';
         });
         
-        card.addEventListener('touchend', function() {
+        flag.addEventListener('touchend', function() {
             this.style.transform = '';
-        });
-    });
-    
-    // Initialize partner brand tags interaction
-    const brandTags = document.querySelectorAll('.brand-tag');
-    brandTags.forEach(tag => {
-        tag.addEventListener('click', function() {
-            // Visual feedback
-            this.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                this.style.transform = '';
-            }, 150);
-        });
-    });
-    
-    // Smooth scrolling for anchor links within the page
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            if (href !== '#') {
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            }
         });
     });
 }
@@ -113,7 +133,7 @@ function initMobileOptimizations() {
     
     // Improve touch targets for better mobile experience
     const interactiveElements = document.querySelectorAll(
-        'button, .btn, .service-card, .partner-card, .brand-tag'
+        'button, .btn, .simple-service, .flag-item'
     );
     
     interactiveElements.forEach(element => {
@@ -156,112 +176,6 @@ function isMobileDevice() {
            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
-// Handle service card expansions (if needed for future features)
-function expandServiceCard(card) {
-    card.classList.toggle('expanded');
-    
-    // Add smooth height transition
-    if (card.classList.contains('expanded')) {
-        card.style.maxHeight = card.scrollHeight + 'px';
-    } else {
-        card.style.maxHeight = '';
-    }
-}
-
-// Initialize any accordion functionality for service details
-function initServiceAccordions() {
-    const serviceDetails = document.querySelectorAll('.service-detail');
-    
-    serviceDetails.forEach(detail => {
-        const trigger = detail.querySelector('.service-detail-trigger');
-        if (trigger) {
-            trigger.addEventListener('click', function() {
-                const content = this.nextElementSibling;
-                const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                
-                this.setAttribute('aria-expanded', !isExpanded);
-                content.style.maxHeight = isExpanded ? '0' : content.scrollHeight + 'px';
-                
-                // Rotate icon if present
-                const icon = this.querySelector('.accordion-icon');
-                if (icon) {
-                    icon.style.transform = isExpanded ? 'rotate(0deg)' : 'rotate(180deg)';
-                }
-            });
-        }
-    });
-}
-
-// Add loading states for any interactive elements
-function initLoadingStates() {
-    const forms = document.querySelectorAll('form');
-    
-    forms.forEach(form => {
-        form.addEventListener('submit', function(e) {
-            const submitBtn = this.querySelector('button[type="submit"]');
-            if (submitBtn) {
-                const originalText = submitBtn.innerHTML;
-                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-                submitBtn.disabled = true;
-                
-                // Revert after 5 seconds (fallback)
-                setTimeout(() => {
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                }, 5000);
-            }
-        });
-    });
-}
-
-// Initialize any tooltips for partner brands
-function initBrandTooltips() {
-    const brandTags = document.querySelectorAll('.brand-tag');
-    
-    brandTags.forEach(tag => {
-        // Simple tooltip on hover/touch
-        tag.addEventListener('mouseenter', showBrandTooltip);
-        tag.addEventListener('mouseleave', hideBrandTooltip);
-        tag.addEventListener('touchstart', showBrandTooltip);
-        tag.addEventListener('touchend', hideBrandTooltip);
-    });
-    
-    function showBrandTooltip(e) {
-        const brandName = this.textContent;
-        let tooltip = document.getElementById('brand-tooltip');
-        
-        if (!tooltip) {
-            tooltip = document.createElement('div');
-            tooltip.id = 'brand-tooltip';
-            tooltip.style.cssText = `
-                position: fixed;
-                background: rgba(0, 0, 0, 0.8);
-                color: white;
-                padding: 8px 12px;
-                border-radius: 4px;
-                font-size: 0.8rem;
-                z-index: 10000;
-                pointer-events: none;
-                transform: translateY(-100%);
-                white-space: nowrap;
-            `;
-            document.body.appendChild(tooltip);
-        }
-        
-        tooltip.textContent = `Learn more about ${brandName}`;
-        tooltip.style.left = e.pageX + 'px';
-        tooltip.style.top = (e.pageY - 10) + 'px';
-        tooltip.style.display = 'block';
-    }
-    
-    function hideBrandTooltip() {
-        const tooltip = document.getElementById('brand-tooltip');
-        if (tooltip) {
-            tooltip.style.display = 'none';
-        }
-    }
-}
-
 // Performance optimization: Debounce scroll events
 function initScrollOptimizations() {
     let scrollTimeout;
@@ -288,21 +202,6 @@ function updateScrollEffects() {
         element.style.transform = `translateY(${scrolled * speed}px)`;
     });
 }
-
-// Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    updateComparisonCount();
-    initServiceAnimations();
-    initServiceInteractions();
-    initServiceAccordions();
-    initLoadingStates();
-    initBrandTooltips();
-    initScrollOptimizations();
-    
-    if (isMobileDevice()) {
-        initMobileOptimizations();
-    }
-});
 
 // Handle page visibility for better resource management
 document.addEventListener('visibilitychange', function() {
@@ -334,6 +233,7 @@ function resumeAnimations() {
 // Export functions for global access if needed
 window.ServicesPage = {
     initServiceAnimations,
+    initFlagInteractions,
     initMobileOptimizations,
     isMobileDevice
 };

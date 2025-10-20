@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <!-- Header -->
     <header class="header" id="header">
         <nav class="nav container">
             <a href="index.html" class="nav__logo">Stark TH</a>
@@ -33,7 +32,6 @@
     </header>
 
     <main class="contact-main">
-        <!-- Contact Hero Section -->
         <section class="contact-hero section">
             <div class="container">
                 <h1 class="contact-title">Get In Touch</h1>
@@ -41,7 +39,6 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section class="contact-section section">
             <div class="container">
                 <div class="contact__container">
@@ -102,25 +99,39 @@
                     
                     <div class="contact__form glass">
                         <h3>Send us a Message</h3>
-                        <form id="contactForm">
+                        <!-- Your verified Formspree form -->
+                        <form id="contactForm" action="https://formspree.io/f/mnngrrvz" method="POST">
+                            <input type="hidden" name="_subject" value="New Contact Form Submission - Stark TH">
+                            <input type="hidden" name="_replyto" id="replyTo">
+                            
                             <div class="form__group">
                                 <label for="name">Full Name *</label>
                                 <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                                <div class="form__message" id="name-error"></div>
                             </div>
                             
                             <div class="form__group">
                                 <label for="email">Email Address *</label>
                                 <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                                <div class="form__message" id="email-error"></div>
                             </div>
                             
                             <div class="form__group">
                                 <label for="subject">Subject *</label>
-                                <input type="text" id="subject" name="subject" required placeholder="Enter message subject">
+                                <select id="subject" name="subject" required>
+                                    <option value="" disabled selected>Please select a subject</option>
+                                    <option value="Regarding vehicle manufacturing">Regarding vehicle manufacturing</option>
+                                    <option value="Regarding tax free vehicle sales and export">Regarding tax free vehicle sales and export</option>
+                                    <option value="Regarding ambulance/frizzier van">Regarding ambulance/frizzier van</option>
+                                    <option value="Others">Others</option>
+                                </select>
+                                <div class="form__message" id="subject-error"></div>
                             </div>
                             
                             <div class="form__group">
                                 <label for="message">Your Message *</label>
                                 <textarea id="message" name="message" rows="6" required placeholder="Tell us about your requirements or questions"></textarea>
+                                <div class="form__message" id="message-error"></div>
                             </div>
                             
                             <button type="submit" class="btn btn--primary form-submit">
@@ -131,29 +142,8 @@
                 </div>
             </div>
         </section>
+    </main>
 
-        <!-- Map Section -->
-        <!--<section class="map-section section">
-            <div class="container">
-                <h2 class="section__title">Visit Our Showroom</h2>
-                <div class="map-container glass">
-                    <div class="map-placeholder">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <h3>Stark TH Showroom</h3>
-                        <p>123 Auto Plaza, Motor City</p>
-                        <p>Open Mon-Sat: 9:00 AM - 7:00 PM</p>
-                        <div class="map-actions">
-                            <a href="#" class="btn btn--primary">
-                                <i class="fas fa-directions"></i> Get Directions
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>-->
-
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer__content">
@@ -183,7 +173,6 @@
         </div>
     </footer>
 
-    <!-- Floating Chat Button -->
     <div class="floating-chat">
         <a href="https://your-facebook-group-link" target="_blank" aria-label="Chat with us on Facebook">
             <i class="fab fa-facebook-messenger"></i>

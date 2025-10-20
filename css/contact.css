@@ -182,8 +182,10 @@
     font-size: 1rem;
 }
 
+/* MODIFICATION HERE: Added .form__group select */
 .form__group input,
-.form__group textarea {
+.form__group textarea,
+.form__group select {
     width: 100%;
     padding: 1rem;
     border: 2px solid #e1e5e9;
@@ -195,13 +197,42 @@
     font-family: inherit;
 }
 
+/* MODIFICATION HERE: Added .form__group select:focus */
 .form__group input:focus,
-.form__group textarea:focus {
+.form__group textarea:focus,
+.form__group select:focus {
     outline: none;
     border-color: var(--color-primary);
     box-shadow: 0 0 0 3px rgba(95, 158, 160, 0.1);
     background: #fafafa;
 }
+
+/* NEW STYLES for the select dropdown */
+.form__group select {
+    /* Remove default appearance */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    
+    /* Add custom dropdown arrow */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22%23666%22%3E%3Cpath%20d%3D%22M5.293%207.293a1%201%200%20011.414%200L10%2010.586l3.293-3.293a1%201%200%20111.414%201.414l-4%204a1%201%200%2001-1.414%200l-4-4a1%201%200%20010-1.414z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2em;
+    padding-right: 3rem; /* Make space for the arrow */
+}
+
+/* Handle the disabled placeholder option */
+.form__group select:invalid {
+    color: #a0a0a0;
+}
+
+.form__group select option {
+    color: var(--color-text);
+    background: var(--color-white);
+}
+/* END NEW STYLES */
+
 
 .form__group input::placeholder,
 .form__group textarea::placeholder {
@@ -348,7 +379,8 @@
     }
     
     .form__group input,
-    .form__group textarea {
+    .form__group textarea,
+    .form__group select { /* MODIFICATION HERE */
         padding: 0.9rem;
         font-size: 16px; /* Prevents zoom on iOS */
     }
@@ -428,7 +460,8 @@
     }
     
     .form__group input,
-    .form__group textarea {
+    .form__group textarea,
+    .form__group select { /* MODIFICATION HERE */
         padding: 0.8rem;
     }
     
@@ -494,7 +527,8 @@
     }
     
     .form__group input,
-    .form__group textarea {
+    .form__group textarea,
+    .form__group select { /* MODIFICATION HERE */
         font-size: 16px; /* Prevents zoom on iOS */
     }
 }
@@ -524,13 +558,15 @@
 
 /* === Success/Error States === */
 .form__group.success input,
-.form__group.success textarea {
+.form__group.success textarea,
+.form__group.success select { /* MODIFICATION HERE */
     border-color: #27ae60;
     background: rgba(39, 174, 96, 0.05);
 }
 
 .form__group.error input,
-.form__group.error textarea {
+.form__group.error textarea,
+.form__group.error select { /* MODIFICATION HERE */
     border-color: #e74c3c;
     background: rgba(231, 76, 60, 0.05);
 }

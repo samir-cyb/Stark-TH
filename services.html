@@ -23,14 +23,8 @@
                         <a href="#" class="nav__link admin-indicator">
                             <i class="fas fa-user-shield"></i> Admin
                         </a>
-        </li>
+                    </li>
                 </ul>
-                <!--<div class="nav__compare">
-                    <a href="inventory.html#comparison-section" class="compare-trigger">
-                        <i class="fas fa-balance-scale"></i>
-                        Compare (<span id="compare-count">0</span>)
-                    </a>
-                </div>-->
             </div>
             <div class="nav__toggle" id="nav-toggle">
                 <i class="fa fa-bars"></i>
@@ -47,51 +41,26 @@
             </div>
         </section>
 
-        <!-- Services Overview -->
-        <section class="services-overview section">
+        <!-- Simplified Services -->
+        <section class="simplified-services section">
             <div class="container">
-                <div class="services-grid">
-                    <div class="service-card glass">
-                        <div class="service-icon">
-                            <i class="fas fa-car"></i>
-                        </div>
-                        <h3>Vehicle Sales</h3>
-                        <p>Wide selection of new and pre-owned luxury vehicles with transparent pricing and financing options.</p>
+                <h2 class="section__title">Our Services</h2>
+                <div class="services-row">
+                    <div class="simple-service glass">
+                        <i class="fas fa-industry"></i>
+                        <h3>Vehicle Manufacturing</h3>
                     </div>
-                    <div class="service-card glass">
-                        <div class="service-icon">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        <h3>Maintenance & Repair</h3>
-                        <p>Expert service and maintenance from certified technicians using genuine parts and advanced diagnostics.</p>
+                    <div class="simple-service glass">
+                        <i class="fas fa-shipping-fast"></i>
+                        <h3>Authorize Vehicle Export</h3>
                     </div>
-                    <div class="service-card glass">
-                        <div class="service-icon">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3>Warranty & Protection</h3>
-                        <p>Comprehensive warranty packages and vehicle protection plans for peace of mind.</p>
+                    <div class="simple-service glass">
+                        <i class="fas fa-tools"></i>
+                        <h3>Body Building & Fabrication with FRB</h3>
                     </div>
-                    <div class="service-card glass">
-                        <div class="service-icon">
-                            <i class="fas fa-exchange-alt"></i>
-                        </div>
-                        <h3>Trade-In Program</h3>
-                        <p>Get the best value for your current vehicle with our fair and transparent trade-in process.</p>
-                    </div>
-                    <div class="service-card glass">
-                        <div class="service-icon">
-                            <i class="fas fa-hand-holding-usd"></i>
-                        </div>
-                        <h3>Financing Solutions</h3>
-                        <p>Flexible financing options with competitive rates tailored to your budget and needs.</p>
-                    </div>
-                    <div class="service-card glass">
-                        <div class="service-icon">
-                            <i class="fas fa-truck-pickup"></i>
-                        </div>
-                        <h3>Delivery Service</h3>
-                        <p>Convenient home or office delivery for purchased vehicles anywhere in our service area.</p>
+                    <div class="simple-service glass">
+                        <i class="fas fa-ambulance"></i>
+                        <h3>Ambulance & Frizzier Van Conversation</h3>
                     </div>
                 </div>
             </div>
@@ -101,92 +70,43 @@
         <section class="partners-section section">
             <div class="container">
                 <h2 class="section__title">Our Trusted Partner Network</h2>
-                <p class="partners-subtitle">We collaborate with industry leaders to provide you with the best automotive experience</p>
+                <p class="partners-subtitle">Tap on a flag to see our partners in that country</p>
                 
-                <div class="partners-grid">
-                    <div class="partner-card glass">
-                        <div class="partner-logo">
-                            <i class="fas fa-oil-can"></i>
-                        </div>
-                        <h3>Premium Lubricants</h3>
-                        <p>Official partners with leading lubricant manufacturers for optimal engine performance and longevity.</p>
-                        <div class="partner-brands">
-                            <span class="brand-tag">Mobil 1</span>
-                            <span class="brand-tag">Castrol</span>
-                            <span class="brand-tag">Shell</span>
-                        </div>
+                <div class="flags-container">
+                    <div class="flag-item" data-country="australia">
+                        <img src="./assets/flags/aus.png" alt="Australia Flag" class="flag-icon-img">
+                        <div class="flag-name">Australia</div>
                     </div>
                     
-                    <div class="partner-card glass">
-                        <div class="partner-logo">
-                            <i class="fas fa-tire"></i>
-                        </div>
-                        <h3>Tire Manufacturers</h3>
-                        <p>Partnerships with top tire brands ensuring safety, performance, and comfort for every driving condition.</p>
-                        <div class="partner-brands">
-                            <span class="brand-tag">Michelin</span>
-                            <span class="brand-tag">Bridgestone</span>
-                            <span class="brand-tag">Pirelli</span>
-                        </div>
+                    <div class="flag-item" data-country="japan">
+                        <img src="./assets/flags/japan.png" alt="Japan Flag" class="flag-icon-img">
+                        <div class="flag-name">Japan</div>
                     </div>
                     
-                    <div class="partner-card glass">
-                        <div class="partner-logo">
-                            <i class="fas fa-shield-alt"></i>
-                        </div>
-                        <h3>Insurance Providers</h3>
-                        <p>Collaboration with leading insurance companies to offer comprehensive coverage at competitive rates.</p>
-                        <div class="partner-brands">
-                            <span class="brand-tag">Allstate</span>
-                            <span class="brand-tag">State Farm</span>
-                            <span class="brand-tag">Geico</span>
-                        </div>
+                    <div class="flag-item" data-country="uk">
+                        <img src="./assets/flags/uk.png" alt="United Kingdom Flag" class="flag-icon-img">
+                        <div class="flag-name">United Kingdom</div>
                     </div>
                     
-                    <div class="partner-card glass">
-                        <div class="partner-logo">
-                            <i class="fas fa-university"></i>
-                        </div>
-                        <h3>Financial Institutions</h3>
-                        <p>Strategic partnerships with banks and credit unions for flexible financing solutions.</p>
-                        <div class="partner-brands">
-                            <span class="brand-tag">Chase Auto</span>
-                            <span class="brand-tag">Capital One</span>
-                            <span class="brand-tag">Wells Fargo</span>
-                        </div>
+                    <div class="flag-item" data-country="bangladesh">
+                        <img src="./assets/flags/ban.jpg" alt="Bangladesh Flag" class="flag-icon-img">
+                        <div class="flag-name">Bangladesh</div>
                     </div>
                     
-                    <div class="partner-card glass">
-                        <div class="partner-logo">
-                            <i class="fas fa-wrench"></i>
-                        </div>
-                        <h3>Parts Suppliers</h3>
-                        <p>Direct relationships with OEM and aftermarket parts suppliers for quality and availability.</p>
-                        <div class="partner-brands">
-                            <span class="brand-tag">Bosch</span>
-                            <span class="brand-tag">Denso</span>
-                            <span class="brand-tag">ACDelco</span>
-                        </div>
+                    <div class="flag-item" data-country="kenya">
+                        <img src="./assets/flags/kenya.png" alt="Kenya Flag" class="flag-icon-img">
+                        <div class="flag-name">Kenya</div>
                     </div>
-                    
-                    <div class="partner-card glass">
-                        <div class="partner-logo">
-                            <i class="fas fa-car-battery"></i>
-                        </div>
-                        <h3>Technology Partners</h3>
-                        <p>Collaboration with automotive technology leaders for advanced systems and connectivity.</p>
-                        <div class="partner-brands">
-                            <span class="brand-tag">Bose</span>
-                            <span class="brand-tag">Harman</span>
-                            <span class="brand-tag">Pioneer</span>
-                        </div>
-                    </div>
+                </div>
+                
+                <div class="companies-container" id="companies-container">
+                    <p>Select a country to view our partners</p>
                 </div>
             </div>
         </section>
 
         <!-- Service Benefits -->
-        <section class="benefits-section section">
+        <!--<section class="benefits-section section">
             <div class="container">
                 <h2 class="section__title">Why Choose Stark TH Services?</h2>
                 <div class="benefits-content">
@@ -221,7 +141,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section>-->
     </main>
 
     <!-- Footer -->

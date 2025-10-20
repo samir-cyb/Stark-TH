@@ -71,7 +71,7 @@ let hiddenCars = JSON.parse(localStorage.getItem('hiddenCars')) || [];
 // State management
 let state = {
     filteredCars: [],
-    currentCategory: null,
+    currentCategory: 'commercial',
     currentSubcategory: null,
     isAdminLoggedIn: localStorage.getItem('isAdminLoggedIn') === 'true'
 };
@@ -120,6 +120,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Update admin button if already logged in
     updateAdminButton();
+    
+    // Show commercial cars by default
+    filterCarsByCategory('commercial');
 });
 
 // Load cars from localStorage
@@ -500,217 +503,174 @@ function openEditModal(carId) {
         document.getElementById('vehicle-brand').value = car.brand;
         document.getElementById('vehicle-price').value = car.price;
         document.getElementById('vehicle-category').value = car.category;
-        document.getElementById('vehicle-vin').value = car.vin;
-        document.getElementById('vehicle-engine').value = car.engineNumber;
-        document.getElementById('vehicle-registration').value = car.registrationNo;
-        document.getElementById('vehicle-chassis').value = car.chassisNumber;
-        document.getElementById('vehicle-features').value = car.features.join(', ');
-        document.getElementById('vehicle-description').value = car.description || '';
-        document.getElementById('vehicle-images').value = car.images.join(', ');
         
-        // Handle subcategory
-        if (car.category === 'special-vans') {
+        if (car.category === 'special-vans' && car.subcategory) {
             vehicleSubcategoryGroup.style.display = 'block';
             document.getElementById('vehicle-subcategory').value = car.subcategory;
         } else {
             vehicleSubcategoryGroup.style.display = 'none';
         }
         
-        // Show delete button
+        document.getElementById('vehicle-vin').value = car.vin || '';
+        document.getElementById('vehicle-engine').value = car.engineNumber || '';
+        document.getElementById('vehicle-registration').value = car.registrationNo || '';
+        document.getElementById('vehicle-chassis').value = car.chassisNumber || '';
+        document.getElementById('vehicle-features').value = car.features ? car.features.join(', ') : '';
+        document.getElementById('vehicle-description').value = car.description || '';
+        document.getElementById('vehicle-images').value = car.images ? car.images.join(', ') : '';
+        
+        // Show delete button for existing vehicles
         document.getElementById('vehicle-delete-btn').style.display = 'block';
         
         vehicleFormModal.style.display = 'block';
     }
 }
 
-// Add new car (published or hidden)
+// Add new car
 function addNewCar(isPublished) {
-    const formData = new FormData(vehicleForm);
+    const name = document.getElementById('vehicle-name').value;
+    const brand = document.getElementById('vehicle-brand').value;
+    const price = parseFloat(document.getElementById('vehicle-price').value);
+    const category = document.getElementById('vehicle-category').value;
+    const subcategory = category === 'special-vans' ? document.getElementById('vehicle-subcategory').value : null;
+    const vin = document.getElementById('vehicle-vin').value;
+    const engineNumber = document.getElementById('vehicle-engine').value;
+    const registrationNo = document.getElementById('vehicle-registration').value;
+    const chassisNumber = document.getElementById('vehicle-chassis').value;
+    const features = document.getElementById('vehicle-features').value.split(',').map(f => f.trim()).filter(f => f);
+    const description = document.getElementById('vehicle-description').value;
+    const images = document.getElementById('vehicle-images').value.split(',').map(img => img.trim()).filter(img => img);
     
-    // Create car object
+    // Generate a new ID
+    const newId = Math.max(...cars.map(c => c.id), ...hiddenCars.map(c => c.id), 0) + 1;
+    
     const newCar = {
-        id: document.getElementById('vehicle-action').value === 'edit' ? 
-            parseInt(document.getElementById('vehicle-id').value) : Date.now(),
-        name: formData.get('vehicle-name'),
-        brand: formData.get('vehicle-brand'),
-        price: parseInt(formData.get('vehicle-price')),
-        displayPrice: `$${parseInt(formData.get('vehicle-price')).toLocaleString()}`,
-        type: 'sedan', // Default type
-        category: formData.get('vehicle-category'),
-        subcategory: formData.get('vehicle-category') === 'special-vans' ? formData.get('vehicle-subcategory') : null,
-        image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", // Default image
-        images: ["https://images.unsplash.com/photo-1555215695-3004980ad54e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"], // Default images
-        features: formData.get('vehicle-features').split(',').map(f => f.trim()).filter(f => f),
-        description: formData.get('vehicle-description'),
-        vin: formData.get('vehicle-vin'),
-        engineNumber: formData.get('vehicle-engine'),
-        registrationNo: formData.get('vehicle-registration'),
-        chassisNumber: formData.get('vehicle-chassis'),
-        isPublished: isPublished,
+        id: newId,
+        name,
+        brand,
+        price,
+        displayPrice: `$${price.toLocaleString()}`,
+        type: category,
+        category,
+        subcategory,
+        image: images[0] || 'https://images.unsplash.com/photo-1558618666-fcd25856cd23?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+        images: images.length > 0 ? images : ['https://images.unsplash.com/photo-1558618666-fcd25856cd23?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80'],
+        features: features.length > 0 ? features : ['Standard Features Included'],
+        description,
+        vin,
+        engineNumber,
+        registrationNo,
+        chassisNumber,
+        isPublished,
         createdAt: new Date().toISOString()
     };
     
-    // Handle custom images if provided
-    const imagesInput = formData.get('vehicle-images');
-    if (imagesInput && imagesInput.trim() !== '') {
-        newCar.images = imagesInput.split(',').map(img => img.trim()).filter(img => img);
-        newCar.image = newCar.images[0];
-    }
-    
     if (isPublished) {
-        if (document.getElementById('vehicle-action').value === 'edit') {
-            // Update existing car
-            const index = cars.findIndex(c => c.id === newCar.id);
-            if (index !== -1) {
-                cars[index] = newCar;
-            }
-        } else {
-            // Add new published car
-            cars.push(newCar);
-        }
+        cars.push(newCar);
         alert('Vehicle published successfully!');
     } else {
-        // Add to hidden cars
         hiddenCars.push(newCar);
         alert('Vehicle saved as hidden successfully!');
     }
     
-    // Save to localStorage
     saveCarsToStorage();
     
-    // Reset form and close modal
-    vehicleForm.reset();
+    // Close modal and reset form
     vehicleFormModal.style.display = 'none';
+    vehicleForm.reset();
     
-    // Refresh the view if we're on the same category
-    if (state.currentCategory) {
+    // Refresh the current view if published
+    if (isPublished) {
         filterCarsByCategory(state.currentCategory, state.currentSubcategory);
-    }
-    
-    // Reload hidden vehicles list if modal is open
-    if (hiddenVehiclesModal.style.display === 'block') {
-        loadHiddenVehicles();
     }
 }
 
-// Update car
+// Update existing car
 function updateCar() {
-    addNewCar(true); // Update as published car
+    const carId = parseInt(document.getElementById('vehicle-id').value);
+    const name = document.getElementById('vehicle-name').value;
+    const brand = document.getElementById('vehicle-brand').value;
+    const price = parseFloat(document.getElementById('vehicle-price').value);
+    const category = document.getElementById('vehicle-category').value;
+    const subcategory = category === 'special-vans' ? document.getElementById('vehicle-subcategory').value : null;
+    const vin = document.getElementById('vehicle-vin').value;
+    const engineNumber = document.getElementById('vehicle-engine').value;
+    const registrationNo = document.getElementById('vehicle-registration').value;
+    const chassisNumber = document.getElementById('vehicle-chassis').value;
+    const features = document.getElementById('vehicle-features').value.split(',').map(f => f.trim()).filter(f => f);
+    const description = document.getElementById('vehicle-description').value;
+    const images = document.getElementById('vehicle-images').value.split(',').map(img => img.trim()).filter(img => img);
+    
+    // Find and update the car
+    const carIndex = cars.findIndex(c => c.id === carId);
+    if (carIndex !== -1) {
+        cars[carIndex] = {
+            ...cars[carIndex],
+            name,
+            brand,
+            price,
+            displayPrice: `$${price.toLocaleString()}`,
+            type: category,
+            category,
+            subcategory,
+            image: images[0] || cars[carIndex].image,
+            images: images.length > 0 ? images : cars[carIndex].images,
+            features: features.length > 0 ? features : cars[carIndex].features,
+            description,
+            vin,
+            engineNumber,
+            registrationNo,
+            chassisNumber
+        };
+        
+        saveCarsToStorage();
+        alert('Vehicle updated successfully!');
+        
+        // Close modal and reset form
+        vehicleFormModal.style.display = 'none';
+        vehicleForm.reset();
+        
+        // Refresh the current view
+        filterCarsByCategory(state.currentCategory, state.currentSubcategory);
+    }
 }
 
 // Delete car
 function deleteCar(carId) {
     // Remove from published cars
-    cars = cars.filter(car => car.id !== carId);
+    const carIndex = cars.findIndex(c => c.id === carId);
+    if (carIndex !== -1) {
+        cars.splice(carIndex, 1);
+    }
     
     // Remove from hidden cars
-    hiddenCars = hiddenCars.filter(car => car.id !== carId);
+    const hiddenCarIndex = hiddenCars.findIndex(c => c.id === carId);
+    if (hiddenCarIndex !== -1) {
+        hiddenCars.splice(hiddenCarIndex, 1);
+    }
     
-    // Save to localStorage
     saveCarsToStorage();
     
-    // Refresh the view
-    if (state.currentCategory) {
-        filterCarsByCategory(state.currentCategory, state.currentSubcategory);
-    }
+    // Refresh the current view
+    filterCarsByCategory(state.currentCategory, state.currentSubcategory);
     
-    // Close modals
-    vehicleFormModal.style.display = 'none';
-    
-    alert('Vehicle deleted successfully!');
-}
-
-// Load hidden vehicles
-function loadHiddenVehicles() {
-    const container = document.getElementById('hidden-vehicles-container');
-    container.innerHTML = '';
-    
-    if (hiddenCars.length === 0) {
-        container.innerHTML = '<p>No hidden vehicles found.</p>';
-        return;
-    }
-    
-    hiddenCars.forEach(car => {
-        const item = document.createElement('div');
-        item.className = 'hidden-vehicle-item';
-        item.innerHTML = `
-            <div class="hidden-vehicle-info">
-                <h4>${car.name}</h4>
-                <p>${car.brand} • ${car.displayPrice}</p>
-                <p><strong>VIN:</strong> ${car.vin}</p>
-                <p><strong>Added:</strong> ${new Date(car.createdAt).toLocaleDateString()}</p>
-            </div>
-            <div class="hidden-vehicle-actions">
-                <button class="publish-btn" data-id="${car.id}">Publish</button>
-                <button class="qr-btn" data-id="${car.id}">Generate QR</button>
-                <button class="hidden-delete-btn" data-id="${car.id}">Delete</button>
-            </div>
-        `;
-        container.appendChild(item);
-    });
-    
-    // Add event listeners
-    document.querySelectorAll('.publish-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const carId = parseInt(this.getAttribute('data-id'));
-            publishHiddenCar(carId);
-        });
-    });
-    
-    document.querySelectorAll('.qr-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const carId = parseInt(this.getAttribute('data-id'));
-            generateQRCode(carId);
-        });
-    });
-    
-    document.querySelectorAll('.hidden-delete-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const carId = parseInt(this.getAttribute('data-id'));
-            if (confirm('Are you sure you want to delete this hidden vehicle?')) {
-                deleteHiddenCar(carId);
-            }
-        });
-    });
-}
-
-// Publish hidden car
-function publishHiddenCar(carId) {
-    const carIndex = hiddenCars.findIndex(c => c.id === carId);
-    if (carIndex !== -1) {
-        const car = hiddenCars[carIndex];
-        car.isPublished = true;
-        cars.push(car);
-        hiddenCars.splice(carIndex, 1);
-        
-        saveCarsToStorage();
+    // If in hidden vehicles modal, refresh that too
+    if (hiddenVehiclesModal.style.display === 'block') {
         loadHiddenVehicles();
-        alert('Vehicle published successfully!');
     }
-}
-
-// Delete hidden car
-function deleteHiddenCar(carId) {
-    hiddenCars = hiddenCars.filter(car => car.id !== carId);
-    saveCarsToStorage();
-    loadHiddenVehicles();
-    alert('Hidden vehicle deleted successfully!');
 }
 
 // Initialize admin features
 function initAdminFeatures() {
-    // Admin login/logout button
+    // Admin login button
     adminLoginBtn.addEventListener('click', function() {
         if (state.isAdminLoggedIn) {
-            // Logout functionality
-            if (confirm('Are you sure you want to logout?')) {
-                localStorage.removeItem('isAdminLoggedIn');
-                state.isAdminLoggedIn = false;
-                updateAdminButton();
-                updateAdminUI();
-                // Redirect to models page with logout parameter
-                window.location.href = 'models.html?logout=true';
-            }
+            // Logout
+            state.isAdminLoggedIn = false;
+            localStorage.setItem('isAdminLoggedIn', 'false');
+            updateAdminUI();
+            updateAdminButton();
+            alert('You have been logged out successfully!');
         } else {
             // Show login modal
             adminLoginModal.style.display = 'block';
@@ -724,47 +684,43 @@ function initAdminFeatures() {
         const username = document.getElementById('admin-username').value;
         const password = document.getElementById('admin-password').value;
         
-        if (username === 'samir' && password === 'samir12') {
+        // Simple authentication (in a real app, this would be server-side)
+        if (username === 'admin' && password === 'admin123') {
             state.isAdminLoggedIn = true;
             localStorage.setItem('isAdminLoggedIn', 'true');
+            updateAdminUI();
+            updateAdminButton();
             adminLoginModal.style.display = 'none';
             adminLoginForm.reset();
-            updateAdminButton();
-            updateAdminUI();
+            alert('Admin login successful!');
         } else {
-            alert('Invalid username or password');
+            alert('Invalid username or password!');
         }
     });
     
     // Add vehicle button
-    addVehicleBtn.addEventListener('click', function() {
-        document.getElementById('vehicle-form-title').textContent = 'Add New Vehicle';
-        document.getElementById('vehicle-action').value = 'add';
-        document.getElementById('vehicle-id').value = '';
-        document.getElementById('vehicle-delete-btn').style.display = 'none';
-        vehicleForm.reset();
-        vehicleFormModal.style.display = 'block';
-    });
+    if (addVehicleBtn) {
+        addVehicleBtn.addEventListener('click', function() {
+            document.getElementById('vehicle-form-title').textContent = 'Add New Vehicle';
+            document.getElementById('vehicle-action').value = 'add';
+            document.getElementById('vehicle-id').value = '';
+            vehicleForm.reset();
+            vehicleSubcategoryGroup.style.display = 'none';
+            document.getElementById('vehicle-delete-btn').style.display = 'none';
+            vehicleFormModal.style.display = 'block';
+        });
+    }
     
     // Manage hidden vehicles button
-    manageHiddenBtn.addEventListener('click', function() {
-        loadHiddenVehicles();
-        hiddenVehiclesModal.style.display = 'block';
-    });
-}
-
-// Update admin button appearance
-function updateAdminButton() {
-    if (state.isAdminLoggedIn) {
-        adminLoginBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i>';
-        adminLoginBtn.title = 'Logout';
-    } else {
-        adminLoginBtn.innerHTML = '<i class="fas fa-user-cog"></i>';
-        adminLoginBtn.title = 'Admin Login';
+    if (manageHiddenBtn) {
+        manageHiddenBtn.addEventListener('click', function() {
+            loadHiddenVehicles();
+            hiddenVehiclesModal.style.display = 'block';
+        });
     }
 }
 
-// Update admin UI elements
+// Update admin UI based on login status
 function updateAdminUI() {
     if (state.isAdminLoggedIn) {
         adminNavItem.style.display = 'block';
@@ -775,113 +731,224 @@ function updateAdminUI() {
     }
     
     // Re-render product cards to show/hide admin actions
-    if (state.currentCategory) {
+    if (state.filteredCars.length > 0) {
         renderProductCards();
     }
 }
 
-// QR Code functionality
-function initQRCodeModal() {
-    // Close QR modal
-    document.getElementById('close-qr').addEventListener('click', function() {
-        qrModal.style.display = 'none';
+// Update admin button text and icon
+function updateAdminButton() {
+    if (state.isAdminLoggedIn) {
+        adminLoginBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i>';
+        adminLoginBtn.title = 'Admin Logout';
+    } else {
+        adminLoginBtn.innerHTML = '<i class="fas fa-user-cog"></i>';
+        adminLoginBtn.title = 'Admin Login';
+    }
+}
+
+// Load hidden vehicles for admin
+function loadHiddenVehicles() {
+    const container = document.getElementById('hidden-vehicles-container');
+    
+    if (hiddenCars.length === 0) {
+        container.innerHTML = '<p class="no-hidden-vehicles">No hidden vehicles found.</p>';
+        return;
+    }
+    
+    container.innerHTML = hiddenCars.map(car => `
+        <div class="hidden-vehicle-card">
+            <div class="hidden-vehicle-info">
+                <img src="${car.image}" alt="${car.name}">
+                <div>
+                    <h4>${car.name}</h4>
+                    <p>${car.displayPrice} • ${car.category}</p>
+                    <small>Created: ${new Date(car.createdAt).toLocaleDateString()}</small>
+                </div>
+            </div>
+            <div class="hidden-vehicle-actions">
+                <button class="btn btn--primary publish-hidden-btn" data-id="${car.id}">Publish</button>
+                <button class="btn btn--secondary edit-hidden-btn" data-id="${car.id}">Edit</button>
+                <button class="btn btn--danger delete-hidden-btn" data-id="${car.id}">Delete</button>
+            </div>
+        </div>
+    `).join('');
+    
+    // Add event listeners to hidden vehicle buttons
+    document.querySelectorAll('.publish-hidden-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const carId = parseInt(this.getAttribute('data-id'));
+            publishHiddenCar(carId);
+        });
     });
     
-    // Download QR button
-    document.getElementById('download-qr').addEventListener('click', function() {
-        const canvas = document.querySelector('#qr-code canvas');
-        if (canvas) {
-            const link = document.createElement('a');
-            link.download = 'qr-code.png';
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-        } else {
-            alert('Could not find QR code canvas to download.');
-        }
+    document.querySelectorAll('.edit-hidden-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const carId = parseInt(this.getAttribute('data-id'));
+            editHiddenCar(carId);
+        });
+    });
+    
+    document.querySelectorAll('.delete-hidden-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const carId = parseInt(this.getAttribute('data-id'));
+            if (confirm('Are you sure you want to delete this hidden vehicle?')) {
+                deleteHiddenCar(carId);
+            }
+        });
     });
 }
 
-// Generate QR code for hidden car
-function generateQRCode(carId) {
-    const car = hiddenCars.find(c => c.id === parseInt(carId));
+// Publish hidden car
+function publishHiddenCar(carId) {
+    const carIndex = hiddenCars.findIndex(c => c.id === carId);
     
-    if (!car) {
-        alert('Vehicle not found!');
-        return;
+    if (carIndex !== -1) {
+        const car = hiddenCars[carIndex];
+        car.isPublished = true;
+        
+        // Move to published cars
+        cars.push(car);
+        hiddenCars.splice(carIndex, 1);
+        
+        saveCarsToStorage();
+        loadHiddenVehicles();
+        alert('Vehicle published successfully!');
     }
+}
 
-    // Create a URL with the car data
-    const baseUrl = window.location.origin;
-    const vehicleDetailsUrl = `${baseUrl}/vehicle-details.html?carId=${car.id}`;
+// Edit hidden car
+function editHiddenCar(carId) {
+    const car = hiddenCars.find(c => c.id === carId);
     
-    const qrCodeElement = document.getElementById('qr-code');
-    qrCodeElement.innerHTML = ''; // Clear previous QR
-    
-    // Check if the (lowercase) qrcode library is loaded
-    if (typeof qrcode !== 'function') {
-        console.error('QR Code library (qrcode) is not loaded!');
-        qrCodeElement.innerHTML = '<p>Error: QR Code library failed to load.</p>';
-        qrModal.style.display = 'block';
-        return;
-    }
-
-    try {
-        // Create QR code instance
-        const typeNumber = 4;
-        const errorCorrectionLevel = 'L';
-        const qr = qrcode(typeNumber, errorCorrectionLevel); // Use lowercase 'qrcode'
-        qr.addData(vehicleDetailsUrl);
-        qr.make();
-
-        // Create canvas for QR code
-        const canvas = document.createElement('canvas');
-        const size = 256;
-        canvas.width = size;
-        canvas.height = size;
+    if (car) {
+        document.getElementById('vehicle-form-title').textContent = 'Edit Hidden Vehicle';
+        document.getElementById('vehicle-action').value = 'edit';
+        document.getElementById('vehicle-id').value = car.id;
         
-        const ctx = canvas.getContext('2d');
+        // Fill form with car data
+        document.getElementById('vehicle-name').value = car.name;
+        document.getElementById('vehicle-brand').value = car.brand;
+        document.getElementById('vehicle-price').value = car.price;
+        document.getElementById('vehicle-category').value = car.category;
         
-        // Calculate cell size with margin
-        const margin = 4;
-        const moduleCount = qr.getModuleCount();
-        const cellSize = (size - 2 * margin) / moduleCount;
-        
-        // Fill background
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillRect(0, 0, size, size);
-        
-        // Draw QR code modules
-        ctx.fillStyle = '#000000';
-        for (let row = 0; row < moduleCount; row++) {
-            for (let col = 0; col < moduleCount; col++) {
-                if (qr.isDark(row, col)) {
-                    ctx.fillRect(
-                        margin + col * cellSize,
-                        margin + row * cellSize,
-                        cellSize,
-                        cellSize
-                    );
-                }
-            }
+        if (car.category === 'special-vans' && car.subcategory) {
+            vehicleSubcategoryGroup.style.display = 'block';
+            document.getElementById('vehicle-subcategory').value = car.subcategory;
+        } else {
+            vehicleSubcategoryGroup.style.display = 'none';
         }
         
-        // Add canvas to the modal
-        qrCodeElement.appendChild(canvas);
-
-        // Add car name
-        const carName = document.createElement('div');
-        carName.textContent = car.name;
-        carName.style.marginTop = '15px';
-        carName.style.fontWeight = 'bold';
-        carName.style.textAlign = 'center';
-        qrCodeElement.appendChild(carName);
+        document.getElementById('vehicle-vin').value = car.vin || '';
+        document.getElementById('vehicle-engine').value = car.engineNumber || '';
+        document.getElementById('vehicle-registration').value = car.registrationNo || '';
+        document.getElementById('vehicle-chassis').value = car.chassisNumber || '';
+        document.getElementById('vehicle-features').value = car.features ? car.features.join(', ') : '';
+        document.getElementById('vehicle-description').value = car.description || '';
+        document.getElementById('vehicle-images').value = car.images ? car.images.join(', ') : '';
         
-        // Show QR modal
-        qrModal.style.display = 'block';
+        // Show delete button
+        document.getElementById('vehicle-delete-btn').style.display = 'block';
+        
+        // Close hidden vehicles modal and open edit modal
+        hiddenVehiclesModal.style.display = 'none';
+        vehicleFormModal.style.display = 'block';
+    }
+}
 
-    } catch (error) {
-        console.error('QR Code generation failed:', error);
-        qrCodeElement.innerHTML = '<p>An error occurred during QR code generation.</p>';
+// Delete hidden car
+function deleteHiddenCar(carId) {
+    const carIndex = hiddenCars.findIndex(c => c.id === carId);
+    
+    if (carIndex !== -1) {
+        hiddenCars.splice(carIndex, 1);
+        saveCarsToStorage();
+        loadHiddenVehicles();
+        alert('Hidden vehicle deleted successfully!');
+    }
+}
+
+// QR Code Modal Functions
+function initQRCodeModal() {
+    // Download QR Code button
+    document.getElementById('download-qr').addEventListener('click', function() {
+        downloadQRCode();
+    });
+    
+    // Close QR Code button
+    document.getElementById('close-qr').addEventListener('click', function() {
+        qrModal.style.display = 'none';
+    });
+}
+
+// Generate QR Code for a car
+function generateQRCode(carId) {
+    const car = cars.find(c => c.id === carId);
+    if (!car) {
+        alert('Car not found!');
+        return;
+    }
+    
+    const qrCodeDiv = document.getElementById('qr-code');
+    const debugInfo = document.getElementById('debug-info');
+    const debugContent = document.getElementById('debug-content');
+    
+    // Clear previous QR code
+    qrCodeDiv.innerHTML = '';
+    
+    // Create car data for QR code
+    const carData = {
+        id: car.id,
+        name: car.name,
+        brand: car.brand,
+        price: car.price,
+        category: car.category,
+        vin: car.vin,
+        engineNumber: car.engineNumber,
+        registrationNo: car.registrationNo,
+        chassisNumber: car.chassisNumber,
+        timestamp: new Date().toISOString()
+    };
+    
+    // Convert to JSON string
+    const qrData = JSON.stringify(carData);
+    
+    // Debug info
+    debugContent.innerHTML = `
+        <div>Data: ${qrData}</div>
+        <div>Length: ${qrData.length} characters</div>
+    `;
+    debugInfo.style.display = 'block';
+    
+    try {
+        // Generate QR code using the library
+        const qr = qrcode(0, 'M');
+        qr.addData(qrData);
+        qr.make();
+        
+        // Create QR code image
+        const qrImage = qr.createImgTag(4);
+        qrCodeDiv.innerHTML = qrImage;
+        
+        // Show the modal
         qrModal.style.display = 'block';
+    } catch (error) {
+        console.error('QR Code generation error:', error);
+        qrCodeDiv.innerHTML = '<p class="error">Error generating QR code. Please try again.</p>';
+        debugContent.innerHTML += `<div class="error">Error: ${error.message}</div>`;
+        qrModal.style.display = 'block';
+    }
+}
+
+// Download QR Code as PNG
+function downloadQRCode() {
+    const qrImage = document.querySelector('#qr-code img');
+    if (qrImage) {
+        const link = document.createElement('a');
+        link.download = 'vehicle-qr-code.png';
+        link.href = qrImage.src;
+        link.click();
+    } else {
+        alert('No QR code available to download.');
     }
 }

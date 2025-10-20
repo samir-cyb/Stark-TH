@@ -57,67 +57,68 @@
         </section>
 
         <!-- Vehicle Categories -->
-        <section class="categories-section section">
-            <div class="container">
-                <h2 class="section__title">Browse by Category</h2>
-                <div class="categories-grid">
-                    <div class="category-card" data-category="commercial">
-                        <div class="category-image">
-                            <img src="https://images.unsplash.com/photo-1558618666-fcd25856cd23?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Commercial Cars">
-                        </div>
-                        <h3>Commercial Cars</h3>
-                    </div>
-                    <div class="category-card" data-category="kit">
-                        <div class="category-image">
-                            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Kit Cars">
-                        </div>
-                        <h3>Kit Cars</h3>
-                    </div>
-                    <div class="category-card" data-category="special-vans">
-                        <div class="category-image">
-                            <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Special Vans">
-                        </div>
-                        <h3>Special Vans</h3>
-                    </div>
-                    <div class="category-card" data-category="vans">
-                        <div class="category-image">
-                            <img src="https://images.unsplash.com/photo-1563720223485-405d5ff12e9d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Vans">
-                        </div>
-                        <h3>Vans</h3>
-                    </div>
+        <!-- Vehicle Categories -->
+<section class="categories-section section">
+    <div class="container">
+        <h2 class="section__title">Browse by Category</h2>
+        <div class="categories-grid">
+            <div class="category-card active" data-category="commercial">
+                <div class="category-image">
+                    <img src="./assets/images/pickup-truck-48-978729-removebg-preview.png" alt="Commercial Cars">
                 </div>
-                
-                <!-- Special Vans Subcategories (hidden by default) -->
-                <div class="subcategories-container" id="special-vans-subcategories" style="display: none;">
-                    <h3>Special Vans</h3>
-                    <div class="subcategories-grid">
-                        <div class="subcategory-card" data-subcategory="ambulance">
-                            <div class="subcategory-image">
-                                <img src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Ambulance">
-                            </div>
-                            <h4>Ambulance</h4>
-                        </div>
-                        <div class="subcategory-card" data-subcategory="freezer">
-                            <div class="subcategory-image">
-                                <img src="https://images.unsplash.com/photo-1558618666-fcd25856cd23?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Freezer Vans">
-                            </div>
-                            <h4>Freezer Vans</h4>
-                        </div>
+                <h3>Commercial Cars</h3>
+            </div>
+            <div class="category-card" data-category="vans">
+                <div class="category-image">
+                    <img src="./assets/images/van-icon-svg-download-png-13282081-removebg-preview.png" alt="Vans">
+                </div>
+                <h3>Vans</h3>
+            </div>
+            <div class="category-card" data-category="special-vans">
+                <div class="category-image">
+                    <img src="./assets/images/sv-removebg-preview (1).png" alt="Special Vans">
+                </div>
+                <h3>Special Vans</h3>
+            </div>
+            <div class="category-card" data-category="kit">
+                <div class="category-image">
+                    <img src="./assets/images/luxury-car-icon-svg-download-png-977866-removebg-preview.png" alt="Kit Cars">
+                </div>
+                <h3>Kit Cars</h3>
+            </div>
+        </div>
+        
+        <!-- Special Vans Subcategories (hidden by default) -->
+        <div class="subcategories-container" id="special-vans-subcategories" style="display: none;">
+            <h3>Special Vans</h3>
+            <div class="subcategories-grid">
+                <div class="subcategory-card" data-subcategory="ambulance">
+                    <div class="subcategory-image">
+                        <img src="./assets/images/Screenshot_2025-10-20_185712-removebg-preview.png" alt="Ambulance">
                     </div>
+                    <h4>Ambulance</h4>
+                </div>
+                <div class="subcategory-card" data-subcategory="freezer">
+                    <div class="subcategory-image">
+                        <img src="./assets/images/freezer-truck-removebg-preview.png" alt="Freezer Vans">
+                    </div>
+                    <h4>Freezer Vans</h4>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
         <!-- Product Showcase Section -->
         <section class="showcase section">
             <div class="container">
-                <h2 class="section__title" id="category-title">Select a Category to View Vehicles</h2>
-                <div id="no-category-selected" class="no-category-message">
+                <h2 class="section__title" id="category-title">Commercial Cars</h2>
+                <div id="no-category-selected" class="no-category-message" style="display: none;">
                     <i class="fas fa-car-side"></i>
                     <h3>Browse Our Categories</h3>
                     <p>Please select a category from above to view available vehicles</p>
                 </div>
-                <div class="showcase__container" id="showcase-container" style="display: none;">
+                <div class="showcase__container" id="showcase-container">
                     <!-- Product cards will be dynamically inserted here -->
                 </div>
             </div>
