@@ -436,3 +436,10 @@
         box-shadow: 0 0 0 3px var(--color-primary), 0 6px 12px rgba(0,0,0,0.15);
     }
 }
+
+/* Zoom out Australia flag image only */
+.flag-item[data-country="australia"] .flag-icon-img {
+    transform: scale(0.95);
+    object-fit: contain;
+}
+
