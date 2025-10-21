@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <!-- Header -->
     <header class="header" id="header">
         <nav class="nav container">
             <a href="index.html" class="nav__logo">Stark SV</a>
@@ -33,13 +32,11 @@
     </header>
 
     <main>
-        <!-- Models Hero -->
         <section class="models-hero section">
             <div class="container">
                 <h1 class="models-title">Our Vehicle Models</h1>
                 <p class="models-subtitle">Explore our wide range of premium vehicles across different categories</p>
                 
-                <!-- Admin Controls (Visible only when logged in) -->
                 <div id="admin-controls" class="admin-controls" style="display: none;">
                     <div class="admin-controls-container">
                         <h3>Admin Controls</h3>
@@ -56,60 +53,56 @@
             </div>
         </section>
 
-        <!-- Vehicle Categories -->
-        <!-- Vehicle Categories -->
-<section class="categories-section section">
-    <div class="container">
-        <h2 class="section__title">Browse by Category</h2>
-        <div class="categories-grid">
-            <div class="category-card active" data-category="commercial">
-                <div class="category-image">
-                    <img src="./assets/images/pickup-truck-48-978729-removebg-preview.png" alt="Commercial Cars">
-                </div>
-                <h3>Commercial Cars</h3>
-            </div>
-            <div class="category-card" data-category="vans">
-                <div class="category-image">
-                    <img src="./assets/images/van-icon-svg-download-png-13282081-removebg-preview.png" alt="Vans">
-                </div>
-                <h3>Vans</h3>
-            </div>
-            <div class="category-card" data-category="special-vans">
-                <div class="category-image">
-                    <img src="./assets/images/sv-removebg-preview (1).png" alt="Special Vans">
-                </div>
-                <h3>Special Vans</h3>
-            </div>
-            <div class="category-card" data-category="kit">
-                <div class="category-image">
-                    <img src="./assets/images/luxury-car-icon-svg-download-png-977866-removebg-preview.png" alt="Kit Cars">
-                </div>
-                <h3>Kit Cars</h3>
-            </div>
-        </div>
-        
-        <!-- Special Vans Subcategories (hidden by default) -->
-        <div class="subcategories-container" id="special-vans-subcategories" style="display: none;">
-            <h3>Special Vans</h3>
-            <div class="subcategories-grid">
-                <div class="subcategory-card" data-subcategory="ambulance">
-                    <div class="subcategory-image">
-                        <img src="./assets/images/Screenshot_2025-10-20_185712-removebg-preview.png" alt="Ambulance">
+        <section class="categories-section section">
+            <div class="container">
+                <h2 class="section__title">Browse by Category</h2>
+                <div class="categories-grid">
+                    <div class="category-card active" data-category="commercial">
+                        <div class="category-image">
+                            <img src="./assets/images/pickup-truck-48-978729-removebg-preview.png" alt="Commercial Cars">
+                        </div>
+                        <h3>Commercial Cars</h3>
                     </div>
-                    <h4>Ambulance</h4>
-                </div>
-                <div class="subcategory-card" data-subcategory="freezer">
-                    <div class="subcategory-image">
-                        <img src="./assets/images/freezer-truck-removebg-preview.png" alt="Freezer Vans">
+                    <div class="category-card" data-category="vans">
+                        <div class="category-image">
+                            <img src="./assets/images/van-icon-svg-download-png-13282081-removebg-preview.png" alt="Vans">
+                        </div>
+                        <h3>Vans</h3>
                     </div>
-                    <h4>Freezer Vans</h4>
+                    <div class="category-card" data-category="special-vans">
+                        <div class="category-image">
+                            <img src="./assets/images/sv-removebg-preview (1).png" alt="Special Vans">
+                        </div>
+                        <h3>Special Vans</h3>
+                    </div>
+                    <div class="category-card" data-category="kit">
+                        <div class="category-image">
+                            <img src="./assets/images/luxury-car-icon-svg-download-png-977866-removebg-preview.png" alt="Kit Cars">
+                        </div>
+                        <h3>Kit Cars</h3>
+                    </div>
+                </div>
+                
+                <div class="subcategories-container" id="special-vans-subcategories" style="display: none;">
+                    <h3>Special Vans</h3>
+                    <div class="subcategories-grid">
+                        <div class="subcategory-card" data-subcategory="ambulance">
+                            <div class="subcategory-image">
+                                <img src="./assets/images/Screenshot_2025-10-20_185712-removebg-preview.png" alt="Ambulance">
+                            </div>
+                            <h4>Ambulance</h4>
+                        </div>
+                        <div class="subcategory-card" data-subcategory="freezer">
+                            <div class="subcategory-image">
+                                <img src="./assets/images/freezer-truck-removebg-preview.png" alt="Freezer Vans">
+                            </div>
+                            <h4>Freezer Vans</h4>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
-        <!-- Product Showcase Section -->
         <section class="showcase section">
             <div class="container">
                 <h2 class="section__title" id="category-title">Commercial Cars</h2>
@@ -119,13 +112,11 @@
                     <p>Please select a category from above to view available vehicles</p>
                 </div>
                 <div class="showcase__container" id="showcase-container">
-                    <!-- Product cards will be dynamically inserted here -->
-                </div>
+                    </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer__content">
@@ -155,7 +146,6 @@
         </div>
     </footer>
 
-    <!-- Floating Chat Button -->
     <div class="floating-chat">
         <a href="https://your-facebook-group-link" target="_blank" aria-label="Chat with us on Facebook">
             <i class="fab fa-facebook-messenger"></i>
@@ -165,15 +155,12 @@
         </a>
     </div>
 
-    <!-- Admin Login/Logout Floating Button -->
     <div class="admin-float">
         <button class="admin-btn" id="admin-login-btn" title="Admin Login">
             <i class="fas fa-user-cog"></i>
         </button>
     </div>
 
-    <!-- Modals -->
-    <!-- Order Options Modal -->
     <div class="modal" id="order-modal">
         <div class="modal__content glass">
             <span class="modal__close">&times;</span>
@@ -201,17 +188,14 @@
         </div>
     </div>
 
-    <!-- View Details Modal -->
     <div class="modal" id="details-modal">
         <div class="modal__content glass large">
             <span class="modal__close">&times;</span>
             <div class="details-content" id="details-content">
-                <!-- Details content will be dynamically inserted here -->
-            </div>
+                </div>
         </div>
     </div>
 
-    <!-- Admin Login Modal -->
     <div class="modal" id="admin-login-modal">
         <div class="modal__content glass">
             <span class="modal__close">&times;</span>
@@ -230,7 +214,6 @@
         </div>
     </div>
 
-    <!-- Add/Edit Vehicle Modal -->
     <div class="modal" id="vehicle-form-modal">
         <div class="modal__content glass large">
             <span class="modal__close">&times;</span>
@@ -307,8 +290,10 @@
                 </div>
                 
                 <div class="form__group">
-                    <label for="vehicle-images">Images URL (comma separated)</label>
-                    <textarea id="vehicle-images" name="vehicle-images" rows="3" placeholder="https://image1.jpg, https://image2.jpg"></textarea>
+                    <label for="vehicle-images">Images (select multiple files)</label>
+                    <input type="file" id="vehicle-images" name="vehicle-images" multiple accept="image/*">
+                    <div id="modal-image-preview" class="image-preview" style="display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;">
+                        </div>
                 </div>
                 
                 <div class="form-actions">
@@ -320,26 +305,27 @@
         </div>
     </div>
 
-    <!-- Hidden Vehicles Modal -->
     <div class="modal" id="hidden-vehicles-modal">
         <div class="modal__content glass large">
             <span class="modal__close">&times;</span>
             <h2 class="modal-title">Hidden Vehicles</h2>
             <div class="hidden-vehicles-list">
                 <div id="hidden-vehicles-container">
-                    <!-- Hidden vehicles will be listed here -->
-                </div>
+                    </div>
             </div>
         </div>
     </div>
 
-    <!-- QR Code Modal -->
     <div class="modal" id="qr-modal">
         <div class="modal__content glass qr-modal">
             <span class="modal__close">&times;</span>
             <h2 class="modal-title">QR Code</h2>
             <div id="qr-code" class="qr-code">
-                <!-- QR code will be generated here -->
+                </div>
+            
+            <div class="qr-link-container" style="margin-top: 1rem; font-size: 0.9rem; word-wrap: break-word; text-align: center;">
+                <p><strong>Scan this code or use the link below:</strong></p>
+                <a href="#" id="qr-link" target="_blank" rel="noopener noreferrer" style="color: var(--color-primary);"></a>
             </div>
             <div class="debug-info" id="debug-info" style="display: none; margin-top: 10px; padding: 10px; background: #f5f5f5; border-radius: 5px; font-size: 12px;">
                 <strong>Debug Info:</strong>
@@ -352,9 +338,7 @@
         </div>
     </div>
     
-  
-    <!-- Replace with a better QR code library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
     <script src="js/script.js"></script>
     <script src="js/models.js"></script>
 </body>

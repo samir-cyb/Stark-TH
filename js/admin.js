@@ -789,14 +789,14 @@ function initQRCodeModal() {
     
     // Download QR button
     document.getElementById('download-qr').addEventListener('click', function() {
-        const canvas = document.querySelector('#qr-code canvas');
-        if (canvas) {
+        const qrImage = document.querySelector('#qr-code img');
+        if (qrImage) {
             const link = document.createElement('a');
-            link.download = 'qr-code.png';
-            link.href = canvas.toDataURL('image/png');
+            link.download = 'vehicle-qr-code.png';
+            link.href = qrImage.src;
             link.click();
         } else {
-            alert('Could not find QR code canvas to download.');
+            alert('No QR code image found to download.');
         }
     });
 }
@@ -804,84 +804,48 @@ function initQRCodeModal() {
 // Generate QR code for hidden car
 function generateQRCode(carId) {
     const car = hiddenCars.find(c => c.id === parseInt(carId));
-    
     if (!car) {
         alert('Vehicle not found!');
         return;
     }
 
-    // Create a URL with the car data
+    const qrCodeDiv = document.getElementById('qr-code');
+    const qrLink = document.getElementById('qr-link');
+    qrCodeDiv.innerHTML = ''; // Clear previous QR
+
+    // Create the URL for the vehicle details page
     const baseUrl = window.location.origin;
     const vehicleDetailsUrl = `${baseUrl}/vehicle-details.html?carId=${car.id}`;
-    
-    const qrCodeElement = document.getElementById('qr-code');
-    qrCodeElement.innerHTML = ''; // Clear previous QR
-    
-    // Check if the (lowercase) qrcode library is loaded
-    if (typeof qrcode !== 'function') {
-        console.error('QR Code library (qrcode) is not loaded!');
-        qrCodeElement.innerHTML = '<p>Error: QR Code library failed to load.</p>';
-        qrModal.style.display = 'block';
-        return;
+
+    // Update the link element
+    if (qrLink) {
+        qrLink.href = vehicleDetailsUrl;
+        qrLink.textContent = vehicleDetailsUrl;
     }
 
     try {
-        // Create QR code instance
-        const typeNumber = 4;
-        const errorCorrectionLevel = 'L';
-        const qr = qrcode(typeNumber, errorCorrectionLevel); // Use lowercase 'qrcode'
+        if (typeof qrcode !== 'function') {
+            console.error('QR Code library (qrcode) is not loaded!');
+            qrCodeDiv.innerHTML = '<p>Error: QR Code library failed to load.</p>';
+            qrModal.style.display = 'block';
+            return;
+        }
+
+        // Generate QR code using the library
+        // Use 0 for automatic version detection, 'M' for medium error correction
+        const qr = qrcode(0, 'M'); 
         qr.addData(vehicleDetailsUrl);
         qr.make();
 
-        // Create canvas for QR code
-        const canvas = document.createElement('canvas');
-        const size = 256;
-        canvas.width = size;
-        canvas.height = size;
-        
-        const ctx = canvas.getContext('2d');
-        
-        // Calculate cell size with margin
-        const margin = 4;
-        const moduleCount = qr.getModuleCount();
-        const cellSize = (size - 2 * margin) / moduleCount;
-        
-        // Fill background
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillRect(0, 0, size, size);
-        
-        // Draw QR code modules
-        ctx.fillStyle = '#000000';
-        for (let row = 0; row < moduleCount; row++) {
-            for (let col = 0; col < moduleCount; col++) {
-                if (qr.isDark(row, col)) {
-                    ctx.fillRect(
-                        margin + col * cellSize,
-                        margin + row * cellSize,
-                        cellSize,
-                        cellSize
-                    );
-                }
-            }
-        }
-        
-        // Add canvas to the modal
-        qrCodeElement.appendChild(canvas);
+        // Create QR code image tag (size 5, margin 4)
+        const qrImage = qr.createImgTag(5, 4);
+        qrCodeDiv.innerHTML = qrImage;
 
-        // Add car name
-        const carName = document.createElement('div');
-        carName.textContent = car.name;
-        carName.style.marginTop = '15px';
-        carName.style.fontWeight = 'bold';
-        carName.style.textAlign = 'center';
-        qrCodeElement.appendChild(carName);
-        
-        // Show QR modal
+        // Show the modal
         qrModal.style.display = 'block';
-
     } catch (error) {
-        console.error('QR Code generation failed:', error);
-        qrCodeElement.innerHTML = '<p>An error occurred during QR code generation.</p>';
+        console.error('QR Code generation error:', error);
+        qrCodeDiv.innerHTML = '<p class="error">Error generating QR code. Please try again.</p>';
         qrModal.style.display = 'block';
     }
 }

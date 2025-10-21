@@ -1007,7 +1007,8 @@ a:focus, button:focus, .btn:focus, .nav__link:focus {
 
 @media (max-width: 480px) {
     .hero__image img {
-        max-width: 400px;
-        transform: scale(1.03); /* Even less zoom on very small screens */
+        max-width: 500px;
+        transform: scale(1.2); /* Even less zoom on very small screens */
     }
 }
+

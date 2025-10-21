@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (isMobileDevice()) {
         initMobileOptimizations();
     }
+    
+    // Initialize scroll optimizations
+    initScrollOptimizations();
 });
 
 // Initialize service animations
@@ -96,17 +99,25 @@ function initFlagInteractions() {
             // Add active class to clicked flag
             this.classList.add('active');
             
-            // Update companies container
-            if (companies && companies.length > 0) {
-                companiesContainer.innerHTML = `
-                    <h3>Our Partners in ${this.querySelector('.flag-name').textContent}</h3>
-                    <div class="companies-list">
-                        ${companies.map(company => `<div class="company-item">${company}</div>`).join('')}
-                    </div>
-                `;
-            } else {
-                companiesContainer.innerHTML = `<p>No partners found for ${this.querySelector('.flag-name').textContent}</p>`;
-            }
+            // Show loading state
+            companiesContainer.classList.add('loading');
+            
+            // Update companies container with slight delay for better UX
+            setTimeout(() => {
+                if (companies && companies.length > 0) {
+                    companiesContainer.innerHTML = `
+                        <h3>Our Partners in ${this.querySelector('.flag-name').textContent}</h3>
+                        <div class="companies-list">
+                            ${companies.map(company => `<div class="company-item">${company}</div>`).join('')}
+                        </div>
+                    `;
+                } else {
+                    companiesContainer.innerHTML = `<p>No partners found for ${this.querySelector('.flag-name').textContent}</p>`;
+                }
+                
+                // Remove loading state
+                companiesContainer.classList.remove('loading');
+            }, 300);
             
             // Add visual feedback
             this.style.transform = 'scale(0.95)';
@@ -142,7 +153,9 @@ function initMobileOptimizations() {
         if (rect.width < 44 || rect.height < 44) {
             element.style.minHeight = '44px';
             element.style.minWidth = '44px';
-            element.style.padding = '12px 16px';
+            element.style.display = 'flex';
+            element.style.alignItems = 'center';
+            element.style.justifyContent = 'center';
         }
     });
     
