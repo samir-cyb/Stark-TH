@@ -140,13 +140,14 @@
 
 /* Special adjustments for specific flags */
 .flag-item[data-country="australia"] .flag-icon-img {
-    object-fit: contain;
-    transform: scale(0.9);
+    object-fit: cover;
+    transform: scale(1);
+    transform-origin: center;
 }
 
 .flag-item[data-country="bangladesh"] .flag-icon-img {
     object-fit: cover;
-    transform: scale(1.1);
+    transform: translateX(1px) scale(1.1);
 }
 
 .flag-item[data-country="japan"] .flag-icon-img {
