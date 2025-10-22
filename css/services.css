@@ -142,14 +142,14 @@
 /* FIXED: Australia flag - better fit */
 .flag-item[data-country="australia"] .flag-icon-img {
     object-fit: cover;
-    transform: scale(1.15);
+    transform: scale(1.02);
     transform-origin: center;
 }
 
 /* FIXED: Bangladesh flag - shift right */
 .flag-item[data-country="bangladesh"] .flag-icon-img {
     object-fit: cover;
-    transform: translateX(8px) scale(1.1);
+    transform:  scale(1.55);
     transform-origin: center;
 }
 
