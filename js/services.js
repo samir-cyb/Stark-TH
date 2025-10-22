@@ -92,6 +92,7 @@ function initFlagInteractions() {
         flag.addEventListener('click', function() {
             const country = this.getAttribute('data-country');
             const companies = companiesData[country];
+            const countryName = this.querySelector('.flag-name').textContent;
             
             // Remove active class from all flags
             flagItems.forEach(f => f.classList.remove('active'));
@@ -106,17 +107,25 @@ function initFlagInteractions() {
             setTimeout(() => {
                 if (companies && companies.length > 0) {
                     companiesContainer.innerHTML = `
-                        <h3>Our Partners in ${this.querySelector('.flag-name').textContent}</h3>
+                        <h3>Our Partners in ${countryName}</h3>
                         <div class="companies-list">
                             ${companies.map(company => `<div class="company-item">${company}</div>`).join('')}
                         </div>
                     `;
                 } else {
-                    companiesContainer.innerHTML = `<p>No partners found for ${this.querySelector('.flag-name').textContent}</p>`;
+                    companiesContainer.innerHTML = `<p>No partners found for ${countryName}</p>`;
                 }
                 
                 // Remove loading state
                 companiesContainer.classList.remove('loading');
+                
+                // Scroll to companies container on mobile for better UX
+                if (isMobileDevice()) {
+                    companiesContainer.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'nearest'
+                    });
+                }
             }, 300);
             
             // Add visual feedback
@@ -144,7 +153,7 @@ function initMobileOptimizations() {
     
     // Improve touch targets for better mobile experience
     const interactiveElements = document.querySelectorAll(
-        'button, .btn, .simple-service, .flag-item'
+        '.simple-service, .flag-item, .company-item'
     );
     
     interactiveElements.forEach(element => {
@@ -153,23 +162,7 @@ function initMobileOptimizations() {
         if (rect.width < 44 || rect.height < 44) {
             element.style.minHeight = '44px';
             element.style.minWidth = '44px';
-            element.style.display = 'flex';
-            element.style.alignItems = 'center';
-            element.style.justifyContent = 'center';
         }
-    });
-    
-    // Optimize images for mobile
-    const images = document.querySelectorAll('img');
-    images.forEach(img => {
-        // Add lazy loading if not already present
-        if (!img.loading) {
-            img.loading = 'lazy';
-        }
-        
-        // Ensure images don't overflow on mobile
-        img.style.maxWidth = '100%';
-        img.style.height = 'auto';
     });
     
     // Handle viewport height issues on mobile
@@ -181,6 +174,15 @@ function initMobileOptimizations() {
     setVH();
     window.addEventListener('resize', setVH);
     window.addEventListener('orientationchange', setVH);
+    
+    // Fix for mobile address bar hiding
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    
+    window.addEventListener('resize', () => {
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
 }
 
 // Utility function to check if device is mobile

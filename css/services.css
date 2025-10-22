@@ -30,7 +30,7 @@
 
 .services-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 1.5rem;
 }
@@ -38,6 +38,7 @@
 .simple-service {
     flex: 1;
     min-width: 200px;
+    max-width: 280px;
     padding: 2rem 1.5rem;
     text-align: center;
     background: var(--color-white);
@@ -79,7 +80,7 @@
     line-height: 1.6;
 }
 
-/* FIXED: Flags Container - Consistent sizing */
+/* FIXED: Flags Container - Better mobile alignment */
 .flags-container {
     display: flex;
     justify-content: center;
@@ -138,21 +139,24 @@
     display: block;
 }
 
-/* Special adjustments for specific flags */
+/* FIXED: Australia flag - better fit */
 .flag-item[data-country="australia"] .flag-icon-img {
     object-fit: cover;
-    transform: scale(1);
+    transform: scale(1.15);
     transform-origin: center;
 }
 
+/* FIXED: Bangladesh flag - shift right */
 .flag-item[data-country="bangladesh"] .flag-icon-img {
     object-fit: cover;
-    transform: translateX(1px) scale(1.1);
+    transform: translateX(8px) scale(1.1);
+    transform-origin: center;
 }
 
 .flag-item[data-country="japan"] .flag-icon-img {
     object-fit: contain;
     background: white;
+    transform: scale(0.95);
 }
 
 .flag-name {
@@ -198,52 +202,7 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
-/* Benefits Section */
-.benefits-section {
-    background: var(--color-background);
-    padding: 4rem 0;
-}
-
-.benefits-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-}
-
-.benefits-text {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.benefit-item h3 {
-    color: var(--color-primary-dark);
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1.2rem;
-}
-
-.benefit-item h3 i {
-    color: var(--color-primary);
-    flex-shrink: 0;
-}
-
-.benefit-item p {
-    color: #666;
-    margin-left: 1.8rem;
-    line-height: 1.6;
-}
-
-.benefits-image img {
-    width: 100%;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-}
-
-/* ===== RESPONSIVE DESIGN - FIXED MOBILE VIEW ===== */
+/* ===== COMPLETELY REVISED MOBILE FIXES ===== */
 
 @media (max-width: 1024px) {
     .services-row {
@@ -252,10 +211,7 @@
     
     .simple-service {
         min-width: 180px;
-    }
-    
-    .benefits-content {
-        gap: 3rem;
+        max-width: 250px;
     }
     
     .flags-container {
@@ -272,29 +228,31 @@
     }
 }
 
+/* FIXED: Complete mobile overhaul */
 @media (max-width: 768px) {
     .services-hero {
         padding: 120px 0 60px;
     }
     
     .simplified-services,
-    .partners-section,
-    .benefits-section {
+    .partners-section {
         padding: 3rem 0;
     }
     
-    /* FIXED: Mobile services layout */
+    /* FIXED: Mobile services layout - proper stacking */
     .services-row {
         flex-direction: column;
+        align-items: center;
         gap: 1.5rem;
         padding: 0 1rem;
     }
     
     .simple-service {
-        padding: 1.5rem;
-        margin: 0;
         width: 100%;
+        max-width: 400px;
         min-width: auto;
+        padding: 1.5rem;
+        margin: 0 auto;
     }
     
     .simple-service i {
@@ -305,29 +263,16 @@
         font-size: 1.1rem;
     }
     
-    /* FIXED: Mobile benefits layout */
-    .benefits-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
-    .benefits-image {
-        order: -1;
-    }
-    
-    .benefit-item h3 {
-        font-size: 1.1rem;
-    }
-    
-    .benefit-item p {
-        margin-left: 1.5rem;
-    }
-    
-    /* FIXED: Mobile flags layout */
+    /* FIXED: Mobile flags layout - centered and properly spaced */
     .flags-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
         gap: 1rem;
         padding: 0 0.5rem;
-        justify-content: center;
+        justify-items: center;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
     }
     
     .flag-item {
@@ -336,8 +281,8 @@
     }
     
     .flag-image-container {
-        width: 60px;
-        height: 60px;
+        width: 65px;
+        height: 65px;
     }
     
     .flag-name {
@@ -367,14 +312,14 @@
     }
 }
 
+/* FIXED: Small mobile devices */
 @media (max-width: 480px) {
     .services-hero {
         padding: 100px 0 40px;
     }
     
     .simplified-services,
-    .partners-section,
-    .benefits-section {
+    .partners-section {
         padding: 2rem 0;
     }
     
@@ -385,7 +330,7 @@
     
     .simple-service {
         padding: 1.25rem;
-        margin: 0;
+        max-width: 350px;
     }
     
     .simple-service i {
@@ -397,22 +342,11 @@
         font-size: 1rem;
     }
     
-    .benefit-item h3 {
-        font-size: 1rem;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
-    
-    .benefit-item p {
-        margin-left: 0;
-        font-size: 0.9rem;
-    }
-    
-    /* FIXED: Extra small screens */
+    /* FIXED: 2-column grid for very small screens */
     .flags-container {
-        gap: 0.8rem;
-        padding: 0 0.25rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        max-width: 300px;
     }
     
     .flag-item {
@@ -420,8 +354,8 @@
     }
     
     .flag-image-container {
-        width: 55px;
-        height: 55px;
+        width: 60px;
+        height: 60px;
     }
     
     .flag-name {
@@ -459,11 +393,12 @@
     }
 }
 
-/* Very small mobile devices */
+/* FIXED: Very small mobile devices */
 @media (max-width: 360px) {
     .flags-container {
-        gap: 0.5rem;
-        padding: 0 0.1rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+        padding: 0 0.25rem;
     }
     
     .flag-item {
@@ -471,8 +406,8 @@
     }
     
     .flag-image-container {
-        width: 50px;
-        height: 50px;
+        width: 55px;
+        height: 55px;
     }
     
     .flag-name {
@@ -487,6 +422,28 @@
     .company-item {
         padding: 0.4rem 0.8rem;
         font-size: 0.8rem;
+    }
+}
+
+/* FIXED: Ultra small screens */
+@media (max-width: 320px) {
+    .flags-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+    
+    .flag-item {
+        min-width: 55px;
+    }
+    
+    .flag-image-container {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .flag-name {
+        font-size: 0.65rem;
+        max-width: 55px;
     }
 }
 
@@ -508,7 +465,7 @@
     }
 }
 
-/* Touch device optimizations */
+/* FIXED: Touch device optimizations */
 @media (hover: none) and (pointer: coarse) {
     .simple-service:hover {
         transform: none;

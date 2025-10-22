@@ -12,8 +12,9 @@ let cars = JSON.parse(localStorage.getItem('publishedCars')) || [
         category: "commercial",
         image: "./assets/images/champ-removebg-preview.png",
         images: [
-            "https://images.unsplash.com/photo-1558618666-fcd25856cd23?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
-            "https://images.unsplash.com/photo-1558618666-fcd25856cd23?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            "./assets/images/champ1.jpg",
+            "./assets/images/champ2.jpg",
+            "./assets/images/champ3.jpg"
         ],
         features: ["2023 Model", "Manual Transmission", "2.0L Diesel Engine", "Spacious Cargo", "GPS Navigation"],
         specs: {
@@ -35,15 +36,109 @@ let cars = JSON.parse(localStorage.getItem('publishedCars')) || [
     },
     {
         id: 2,
-        name: "Caterham Seven Kit Car",
-        brand: "caterham",
+        name: "Hilux Revo Standard Cab",
+        brand: "Toyota",
         price: 45000,
         displayPrice: "$45,000",
-        type: "sports",
-        category: "kit",
-        image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+        type: "commercial",
+        category: "commercial",
+        image: "./assets/images/revo0.png",
         images: [
             "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+        ],
+        features: ["Build-It-Yourself Kit", "Lightweight Design", "Sport Suspension", "Racing Seats", "Carbon Fiber Parts"],
+        specs: {
+            engine: "2.0L 4-cylinder",
+            horsepower: "237 HP",
+            torque: "180 lb-ft",
+            transmission: "5-speed manual",
+            drivetrain: "Rear-wheel drive",
+            fuelEconomy: "28 city / 36 highway",
+            weight: "1190 lbs",
+            color: "British Racing Green"
+        },
+        vin: "2HGCM82633A654321",
+        engineNumber: "ENG987654321",
+        registrationNo: "DEF456",
+        chassisNumber: "CHS987654321",
+        isPublished: true,
+        createdAt: new Date().toISOString()
+    },
+
+    {
+        id: 3,
+        name: "Hilux Revo Prerunner & 4*4",
+        brand: "Toyota",
+        price: 45000,
+        displayPrice: "$45,000",
+        type: "commercial",
+        category: "commercial",
+        image: "./assets/images/revop0.png",
+        images: [
+            "./assets/images/revop1.jpg"
+        ],
+        features: ["Build-It-Yourself Kit", "Lightweight Design", "Sport Suspension", "Racing Seats", "Carbon Fiber Parts"],
+        specs: {
+            engine: "2.0L 4-cylinder",
+            horsepower: "237 HP",
+            torque: "180 lb-ft",
+            transmission: "5-speed manual",
+            drivetrain: "Rear-wheel drive",
+            fuelEconomy: "28 city / 36 highway",
+            weight: "1190 lbs",
+            color: "British Racing Green"
+        },
+        vin: "2HGCM82633A654321",
+        engineNumber: "ENG987654321",
+        registrationNo: "DEF456",
+        chassisNumber: "CHS987654321",
+        isPublished: true,
+        createdAt: new Date().toISOString()
+    },
+
+
+    {
+        id: 4,
+        name: "Hiace",
+        brand: "Toyota",
+        price: 45000,
+        displayPrice: "$45,000",
+        type: "vans",
+        category: "vans",
+        image: "./assets/images/van0.png",
+        images: [
+            "./assets/images/revop1.jpg"
+        ],
+        features: ["Build-It-Yourself Kit", "Lightweight Design", "Sport Suspension", "Racing Seats", "Carbon Fiber Parts"],
+        specs: {
+            engine: "2.0L 4-cylinder",
+            horsepower: "237 HP",
+            torque: "180 lb-ft",
+            transmission: "5-speed manual",
+            drivetrain: "Rear-wheel drive",
+            fuelEconomy: "28 city / 36 highway",
+            weight: "1190 lbs",
+            color: "British Racing Green"
+        },
+        vin: "2HGCM82633A654321",
+        engineNumber: "ENG987654321",
+        registrationNo: "DEF456",
+        chassisNumber: "CHS987654321",
+        isPublished: true,
+        createdAt: new Date().toISOString()
+    },
+
+    {
+        id: 5,
+        name: "commuter",
+        brand: "Toyota",
+        price: 45000,
+        displayPrice: "$45,000",
+        type: "vans",
+        category: "vans",
+        image: "./assets/images/com0.png",
+        images: [
+            "./assets/images/revop1.jpg"
         ],
         features: ["Build-It-Yourself Kit", "Lightweight Design", "Sport Suspension", "Racing Seats", "Carbon Fiber Parts"],
         specs: {
